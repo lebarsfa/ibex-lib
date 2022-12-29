@@ -475,3 +475,31 @@
  	{
  		#if defined(__GNUC__) && __GNUC__ < 3
  		std::istrstream istr(in);
+--- filibsrc-3.0.2.2/rounding_control/rounding_control_double_iso9x.icc	2016-07-19 15:50:06 +0100
++++ filibsrc-3.0.2.2/rounding_control/rounding_control_double_iso9x.icc	2022-12-30 00:30:22 +0100
+@@ -25,7 +25,11 @@
+ **  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA
+ */
+ 			#include <fenv.h>
++			#if defined(_MSC_VER)
++			#pragma fenv_access(on)
++			#else
+ 			#pragma STDC FENV_ACCESS ON
++			#endif
+ 
+ 			/**
+ 			 * construct rounding control conforming to
+--- filibsrc-3.0.2.2/rounding_control/rounding_control_float_iso9x.icc	2016-07-19 15:50:06 +0100
++++ filibsrc-3.0.2.2/rounding_control/rounding_control_float_iso9x.icc	2022-12-30 00:30:39 +0100
+@@ -25,7 +25,11 @@
+ **  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA
+ */
+ 			#include <fenv.h>
++			#if defined(_MSC_VER)
++			#pragma fenv_access(on)
++			#else
+ 			#pragma STDC FENV_ACCESS ON
++			#endif
+ 
+ 			/**
+ 			 * construct rounding control conforming to

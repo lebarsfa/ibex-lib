@@ -56,7 +56,7 @@ def configure (conf):
 #        modifying them to store all pertinent intermediate computations
 #        into variables.
 #==============================================================================
-    for f in ["-frounding-math", "-ffloat-store"]:
+    for f in ["-frounding-math", "-ffloat-store", "-fno-fast-math", "-ffp-contract=off", "-ffp-mode=full", "/fp:strict"]:
         conf.check_cxx (cxxflags = f, uselib_store = "ITV_LIB")
 
 
