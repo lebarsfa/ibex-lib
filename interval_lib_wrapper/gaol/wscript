@@ -94,7 +94,8 @@ def configure (conf):
 		conf.env.append_unique ("LIBPATH_IBEX_DEPS", mathlib_lib)
 	else:
 		conf.msg("Using library mathlib/ultim from", "3rd/ subdirectory")
-		mathlib_archive = "mathlib-2.1.0.tar.gz"
+		# From https://github.com/lebarsfa/GAOL
+		mathlib_archive = "mathlib-master.zip"
 		if Utils.is_win32:
 			mathlib_ret = conf.install_mathlib_win32 (mathlib_archive)
 		else:
@@ -117,7 +118,8 @@ def configure (conf):
 		conf.env.append_unique ("LIBPATH_IBEX_DEPS", gaol_lib)
 	else:
 		conf.msg ("Using library gaol from", "3rd/ subdirectory")
-		gaol_archive = "gaol-4.2.0.tar.gz"
+		# From https://github.com/lebarsfa/GAOL
+		gaol_archive = "GAOL-master.zip"
 		if Utils.is_win32:
 			args = "--with-mathlib-include=%s" % ibexutils.convert_path_win2msys (mathlib_include)
 			args += " --with-mathlib-lib=%s" % ibexutils.convert_path_win2msys (mathlib_lib)
@@ -133,13 +135,14 @@ def configure (conf):
 				conf_args = args)
 		_, gaol_include, gaol_lib = gaol_ret
 		conf.env.INSTALL_3RD = True
-		conf.env.append_unique ("LIB_3RD_LIST", [ "gdtoa", "gaol" ] )
+#		conf.env.append_unique ("LIB_3RD_LIST", [ "gdtoa", "gaol" ] )
+		conf.env.append_unique ("LIB_3RD_LIST", [ "gaol" ] )
 
 	# Looking for gdtoa header and library (it should be provided gaol)
-	conf.check_cxx (header_name = "gdtoa/gdtoa.h", includes = gaol_include,
-		use = [ "IBEX", "ITV_LIB" ], uselib_store="ITV_LIB")
-	conf.check_cxx (lib = "gdtoa", libpath = gaol_lib,
-		use = [ "IBEX", "ITV_LIB" ], uselib_store = "ITV_LIB")
+#	conf.check_cxx (header_name = "gdtoa/gdtoa.h", includes = gaol_include,
+#		use = [ "IBEX", "ITV_LIB" ], uselib_store="ITV_LIB")
+#	conf.check_cxx (lib = "gdtoa", libpath = gaol_lib,
+#		use = [ "IBEX", "ITV_LIB" ], uselib_store = "ITV_LIB")
 
 	# Looking for gaol headers and library.
 	# We also test if we need to add sse2 or sse3 flags.
@@ -186,4 +189,5 @@ def configure (conf):
 #        into variables.
 #==============================================================================
 	if Utils.is_win32: 
-		conf.check_cxx (cxxflags = "-ffloat-store", use = [ "IBEX", "ITV_LIB" ], uselib_store = "ITV_LIB")
+        for f in ["-frounding-math", "-ffloat-store", "-fno-fast-math", "-ffp-contract=off", "-ffp-mode=full", "/fp:strict"]:
+            conf.check_cxx (cxxflags = f, uselib_store = "ITV_LIB")
