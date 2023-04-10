@@ -471,8 +471,8 @@ function (IBEX_INIT_COMMON)
 
   # Flags related to portability and IEEE 754 double support
   if (MSVC)
-    set (CMAKE_C_FLAGS "${CMAKE_C_FLAGS} /D _CRT_SECURE_NO_WARNINGS /fp:strict /Zc:__cplusplus /Zc:strictStrings-")
-    set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /D _CRT_SECURE_NO_WARNINGS /fp:strict /Zc:__cplusplus /Zc:strictStrings-")
+    set (CMAKE_C_FLAGS "${CMAKE_C_FLAGS} /D _CRT_SECURE_NO_WARNINGS /D _CRT_NONSTDC_NO_WARNINGS /fp:strict /Zc:__cplusplus /Zc:strictStrings-")
+    set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /D _CRT_SECURE_NO_WARNINGS /D _CRT_NONSTDC_NO_WARNINGS /fp:strict /Zc:__cplusplus /Zc:strictStrings-")
     set (CMAKE_C_FLAGS_DEBUG "${CMAKE_C_FLAGS_DEBUG} /D DEBUG")
     set (CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} /D DEBUG")
   else ()  
