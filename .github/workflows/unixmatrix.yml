@@ -85,7 +85,12 @@ jobs:
         choco install -y -r --no-progress mingw --version=11.2.0 --force ${{ matrix.cfg.choco_flags }}
         echo C:\ProgramData\chocolatey\lib\mingw\tools\install\mingw32\bin>>%GITHUB_PATH%
       if: (runner.os=='Windows')&&(matrix.cfg.runtime=='mingw11')&&(matrix.cfg.arch=='x86')
-    - run: choco install -y -r --no-progress checksum wget winflexbison make patch zip ${{ matrix.cfg.choco_flags }}
+    - run: |
+        choco install -y -r --no-progress checksum wget zip make
+        rem Workaround to try solve some random package download failures...
+        wget https://www.ensta-bretagne.fr/packages/choco/winflexbison.2.4.9.20170215.nupkg --no-check-certificate -nv
+        wget https://www.ensta-bretagne.fr/packages/choco/patch.2.5.9.nupkg --no-check-certificate -nv
+        choco install -y -r --no-progress -s . winflexbison patch ${{ matrix.cfg.choco_flags }}
       if: runner.os=='Windows'
     - run: sudo apt-get -q update ; sudo apt-get -y install flex bison dpkg-dev || true
       if: runner.os=='Linux'
