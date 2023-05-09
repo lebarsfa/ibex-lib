@@ -27,17 +27,19 @@ IBEX is a C++ library for constraint processing over real numbers.
 
 ## Package parameters
 The following package parameters can be set:
-- `/url:URL` - Will install the specified binary package, see versions from https://github.com/lebarsfa/ibex-lib/releases (the Windows `PATH` might need to be updated manually, etc.). By default, only the MinGW libraries compatible with the corresponding MinGW Chocolatey package dependency are installed. Use the standard parameter `choco install --ignore-dependencies ...` to avoid installing MinGW Chocolatey package dependency if needed.
-- `/NoPath` - Will not try to update Windows PATH.
+- `/url:URL` - Will install the specified binary package (e.g. built for Visual Studio), see versions from https://github.com/lebarsfa/ibex-lib/releases (the Windows `PATH` might need to be updated manually with e.g. `C:\ProgramData\chocolatey\lib\ibex\bin`, etc.). By default, only the MinGW libraries compatible with the corresponding MinGW Chocolatey package dependency are installed. Use the standard parameter `choco install --ignore-dependencies ...` to avoid installing MinGW Chocolatey package dependency if needed.
+- `/urlX:URL` - Same as above, with X in [1,99], except this will not disable the installation of the MinGW libraries compatible with the corresponding MinGW Chocolatey package dependency.
+- `/InstallDir:INSTALLDIR` - Installation directory.
+- `/NoPath` - Will not try to update Windows `PATH`.
 - `/NoRegistry` - Will not try to update Windows registry.
-To pass package parameters, use `--params "''"` (e.g. `choco install ibex --params "'/NoPath /NoRegistry'"`), e.g.
+To pass package parameters, use `--params "''"` (e.g. `choco install ibex --params "'/NoPath /NoRegistry'"`), and to install another binary package, try e.g.
 ```
-choco install -y -f --ignore-dependencies ibex --params "'/url:https://github.com/lebarsfa/ibex-lib/releases/download/ibex-2.8.9.20220812/ibex_x86_vc15.zip'"
+choco install -y --ignore-dependencies ibex --params "'/url:https://github.com/lebarsfa/ibex-lib/releases/download/ibex-2.8.9.20220812/ibex_x86_vc15.zip'"
 ```
     </description>
     <releaseNotes>https://github.com/lebarsfa/ibex-lib/releases</releaseNotes>
     <dependencies>
-      <dependency id="mingw" version="[8.1.0]" />
+      <dependency id="mingw" version="[11.2.0.07112021]" />
     </dependencies>
   </metadata>
 </package>
