@@ -28,24 +28,25 @@ jobs:
         fail-fast: false
         matrix:
             cfg:
-            - { os: windows-2022, shell: cmd, arch: x64, runtime: vc17, cmake_params: '-G "Visual Studio 17" -T v143 -A x64', cmake_flags: ' /wd4267 /wd4244 /wd4305 /wd4996', ilib: 'filib', test_config: 'Release/', desc: 'Windows Visual Studio 2022 x64' }
-            - { os: windows-2022, shell: cmd, arch: x86, runtime: vc17, cmake_params: '-G "Visual Studio 17" -T v143 -A Win32', choco_flags: '--x86', cmake_flags: ' /wd4267 /wd4244 /wd4305 /wd4996', ilib: 'filib', test_config: 'Release/', desc: 'Windows Visual Studio 2022 x86' }
-            - { os: windows-2022, shell: cmd, arch: x64, runtime: vc16, cmake_params: '-G "Visual Studio 17" -T v142 -A x64', cmake_flags: ' /wd4267 /wd4244 /wd4305 /wd4996', ilib: 'filib', test_config: 'Release/', desc: 'Windows Visual Studio 2019 x64' }
-            - { os: windows-2022, shell: cmd, arch: x86, runtime: vc16, cmake_params: '-G "Visual Studio 17" -T v142 -A Win32', choco_flags: '--x86', cmake_flags: ' /wd4267 /wd4244 /wd4305 /wd4996', ilib: 'filib', test_config: 'Release/', desc: 'Windows Visual Studio 2019 x86' }
-            - { os: windows-2022, shell: cmd, arch: x64, runtime: vc15, cmake_params: '-G "Visual Studio 17" -T v141 -A x64', cmake_flags: ' /wd4267 /wd4244 /wd4305 /wd4996', ilib: 'filib', test_config: 'Release/', desc: 'Windows Visual Studio 2017 x64' }
-            - { os: windows-2022, shell: cmd, arch: x86, runtime: vc15, cmake_params: '-G "Visual Studio 17" -T v141 -A Win32', choco_flags: '--x86', cmake_flags: ' /wd4267 /wd4244 /wd4305 /wd4996', ilib: 'filib', test_config: 'Release/', desc: 'Windows Visual Studio 2017 x86' }
-            - { os: windows-2022, shell: cmd, arch: x64, runtime: mingw11, cmake_params: '-G "MinGW Makefiles"', cmake_flags: '-fPIC', ilib: 'filib', desc: 'Windows MinGW 11.2.0 x64' }
-            - { os: windows-2022, shell: cmd, arch: x86, runtime: mingw11, cmake_params: '-G "MinGW Makefiles"', cmake_flags: '-fPIC', ilib: 'filib', choco_flags: '--x86', desc: 'Windows MinGW 11.2.0 x86' }
-            - { os: windows-2019, shell: cmd, arch: x64, runtime: mingw8, cmake_params: '-G "MinGW Makefiles"', cmake_flags: '-fPIC', ilib: 'filib', desc: 'Windows MinGW 8.1.0 x64' }
-            - { os: windows-2019, shell: cmd, arch: x86, runtime: mingw8, cmake_params: '-G "MinGW Makefiles"', cmake_flags: '-fPIC', ilib: 'filib', choco_flags: '--x86', desc: 'Windows MinGW 8.1.0 x86' }
-            - { os: windows-2019, shell: cmd, arch: x64, runtime: mingw7, cmake_params: '-G "MinGW Makefiles"', cmake_flags: '-fPIC', ilib: 'filib', desc: 'Windows MinGW 7.3.0 x64' }
-            - { os: windows-2019, shell: cmd, arch: x86, runtime: mingw7, cmake_params: '-G "MinGW Makefiles"', cmake_flags: '-fPIC', ilib: 'filib', choco_flags: '--x86', desc: 'Windows MinGW 7.3.0 x86' }
-            - { os: ubuntu-22.04, shell: bash, arch: amd64, runtime: jammy, cmake_flags: '-fPIC', ilib: 'gaol', desc: 'Ubuntu 22.04' }
-            - { os: ubuntu-20.04, shell: bash, arch: amd64, runtime: focal, cmake_flags: '-fPIC', ilib: 'gaol', desc: 'Ubuntu 20.04' }
-            - { os: macos-12, shell: bash, arch: arm64, runtime: monterey, cmake_params: '-D CMAKE_SYSTEM_NAME=Darwin -D CMAKE_OSX_ARCHITECTURES=arm64', cmake_flags: '-fPIC', ilib: 'filib', desc: 'macOS Monterey arm64' }
-            - { os: macos-12, shell: bash, arch: x86_64, runtime: monterey, cmake_params: '-D CMAKE_SYSTEM_NAME=Darwin -D CMAKE_OSX_ARCHITECTURES=x86_64', cmake_flags: '-fPIC', ilib: 'gaol', desc: 'macOS Monterey x86_64' }
-            - { os: macos-11, shell: bash, arch: arm64, runtime: bigsur, cmake_params: '-D CMAKE_SYSTEM_NAME=Darwin -D CMAKE_OSX_ARCHITECTURES=arm64', cmake_flags: '-fPIC', ilib: 'filib', desc: 'macOS Big Sur arm64' }
-            - { os: macos-11, shell: bash, arch: x86_64, runtime: bigsur, cmake_params: '-D CMAKE_SYSTEM_NAME=Darwin -D CMAKE_OSX_ARCHITECTURES=x86_64', cmake_flags: '-fPIC', ilib: 'gaol', desc: 'macOS Big Sur x86_64' }
+            - { os: windows-2022, shell: cmd, arch: x64, runtime: vc17, cmake_params: '-G "Visual Studio 17" -T v143 -A x64', cmake_flags: ' /wd4267 /wd4244 /wd4305 /wd4996', config: 'Release', test_config: 'Release/', ilib: 'filib', desc: 'Windows Visual Studio 2022 x64' }
+            - { os: windows-2022, shell: cmd, arch: x64, runtime: vc17, cmake_params: '-G "Visual Studio 17" -T v143 -A x64', cmake_flags: ' /wd4267 /wd4244 /wd4305 /wd4996', config: 'Debug', test_config: 'Debug/', ilib: 'filib', desc: 'Windows Visual Studio 2022 x64 Debug' }
+            - { os: windows-2022, shell: cmd, arch: x86, runtime: vc17, cmake_params: '-G "Visual Studio 17" -T v143 -A Win32', cmake_flags: ' /wd4267 /wd4244 /wd4305 /wd4996', config: 'Release', test_config: 'Release/', ilib: 'filib', choco_flags: '--x86', desc: 'Windows Visual Studio 2022 x86' }
+            - { os: windows-2022, shell: cmd, arch: x64, runtime: vc16, cmake_params: '-G "Visual Studio 17" -T v142 -A x64', cmake_flags: ' /wd4267 /wd4244 /wd4305 /wd4996', config: 'Release', test_config: 'Release/', ilib: 'filib', desc: 'Windows Visual Studio 2019 x64' }
+            - { os: windows-2022, shell: cmd, arch: x86, runtime: vc16, cmake_params: '-G "Visual Studio 17" -T v142 -A Win32', cmake_flags: ' /wd4267 /wd4244 /wd4305 /wd4996', config: 'Release', test_config: 'Release/', ilib: 'filib', choco_flags: '--x86', desc: 'Windows Visual Studio 2019 x86' }
+            - { os: windows-2022, shell: cmd, arch: x64, runtime: vc15, cmake_params: '-G "Visual Studio 17" -T v141 -A x64', cmake_flags: ' /wd4267 /wd4244 /wd4305 /wd4996', config: 'Release', test_config: 'Release/', ilib: 'filib', desc: 'Windows Visual Studio 2017 x64' }
+            - { os: windows-2022, shell: cmd, arch: x86, runtime: vc15, cmake_params: '-G "Visual Studio 17" -T v141 -A Win32', cmake_flags: ' /wd4267 /wd4244 /wd4305 /wd4996', config: 'Release', test_config: 'Release/', ilib: 'filib', choco_flags: '--x86', desc: 'Windows Visual Studio 2017 x86' }
+            - { os: windows-2022, shell: cmd, arch: x64, runtime: mingw11, cmake_params: '-G "MinGW Makefiles"', cmake_flags: '-fPIC', config: 'Release', ilib: 'filib', desc: 'Windows MinGW 11.2.0 x64' }
+            - { os: windows-2022, shell: cmd, arch: x86, runtime: mingw11, cmake_params: '-G "MinGW Makefiles"', cmake_flags: '-fPIC', config: 'Release', ilib: 'filib', choco_flags: '--x86', desc: 'Windows MinGW 11.2.0 x86' }
+            - { os: windows-2019, shell: cmd, arch: x64, runtime: mingw8, cmake_params: '-G "MinGW Makefiles"', cmake_flags: '-fPIC', config: 'Release', ilib: 'filib', desc: 'Windows MinGW 8.1.0 x64' }
+            - { os: windows-2019, shell: cmd, arch: x86, runtime: mingw8, cmake_params: '-G "MinGW Makefiles"', cmake_flags: '-fPIC', config: 'Release', ilib: 'filib', choco_flags: '--x86', desc: 'Windows MinGW 8.1.0 x86' }
+            - { os: windows-2019, shell: cmd, arch: x64, runtime: mingw7, cmake_params: '-G "MinGW Makefiles"', cmake_flags: '-fPIC', config: 'Release', ilib: 'filib', desc: 'Windows MinGW 7.3.0 x64' }
+            - { os: windows-2019, shell: cmd, arch: x86, runtime: mingw7, cmake_params: '-G "MinGW Makefiles"', cmake_flags: '-fPIC', config: 'Release', ilib: 'filib', choco_flags: '--x86', desc: 'Windows MinGW 7.3.0 x86' }
+            - { os: ubuntu-22.04, shell: bash, arch: amd64, runtime: jammy, cmake_flags: '-fPIC', config: 'Release', ilib: 'gaol', desc: 'Ubuntu 22.04' }
+            - { os: ubuntu-20.04, shell: bash, arch: amd64, runtime: focal, cmake_flags: '-fPIC', config: 'Release', ilib: 'gaol', desc: 'Ubuntu 20.04' }
+            - { os: macos-12, shell: bash, arch: arm64, runtime: monterey, cmake_params: '-D CMAKE_SYSTEM_NAME=Darwin -D CMAKE_OSX_ARCHITECTURES=arm64', cmake_flags: '-fPIC', config: 'Release', ilib: 'filib', desc: 'macOS Monterey arm64' }
+            - { os: macos-12, shell: bash, arch: x86_64, runtime: monterey, cmake_params: '-D CMAKE_SYSTEM_NAME=Darwin -D CMAKE_OSX_ARCHITECTURES=x86_64', cmake_flags: '-fPIC', config: 'Release', ilib: 'gaol', desc: 'macOS Monterey x86_64' }
+            - { os: macos-11, shell: bash, arch: arm64, runtime: bigsur, cmake_params: '-D CMAKE_SYSTEM_NAME=Darwin -D CMAKE_OSX_ARCHITECTURES=arm64', cmake_flags: '-fPIC', config: 'Release', ilib: 'filib', desc: 'macOS Big Sur arm64' }
+            - { os: macos-11, shell: bash, arch: x86_64, runtime: bigsur, cmake_params: '-D CMAKE_SYSTEM_NAME=Darwin -D CMAKE_OSX_ARCHITECTURES=x86_64', cmake_flags: '-fPIC', config: 'Release', ilib: 'gaol', desc: 'macOS Big Sur x86_64' }
     name: ${{ matrix.cfg.desc }}
     steps: 
     - uses: actions/checkout@v3
@@ -93,14 +94,14 @@ jobs:
       if: runner.os=='Linux'
     - run: |
         mkdir build ; cd build
-        cmake -E env CXXFLAGS="${{ matrix.cfg.cmake_flags }}" CFLAGS="${{ matrix.cfg.cmake_flags }}" cmake ${{ matrix.cfg.cmake_params }} -D INTERVAL_LIB=${{ matrix.cfg.ilib }} -D CMAKE_INSTALL_PREFIX=../ibex ..
-        cmake --build . --config Release --target install
+        cmake -E env CXXFLAGS="${{ matrix.cfg.cmake_flags }}" CFLAGS="${{ matrix.cfg.cmake_flags }}" cmake ${{ matrix.cfg.cmake_params }} -D CMAKE_BUILD_TYPE=${{ matrix.cfg.config }} -D INTERVAL_LIB=${{ matrix.cfg.ilib }} -D CMAKE_INSTALL_PREFIX=../ibex ..
+        cmake --build . --config ${{ matrix.cfg.config }} --target install
         cd ..
         # Probably to remove if GAOL is installed using CMake...
         if [ ${{ runner.os }} = Windows ]; then sed -i "s/D:\\/a\\/ibex-lib\\/ibex-lib\\/ibex/\${_IMPORT_PREFIX}/" ibex/share/ibex/cmake/*.cmake ; fi
         if [ ${{ runner.os }} = Linux ]; then sed -i "s/\\/home\\/runner\\/work\\/ibex-lib\\/ibex-lib\\/ibex/\${_IMPORT_PREFIX}/" ibex/share/ibex/cmake/*.cmake ; fi
         if [ ${{ runner.os }} = macOS ]; then sed -i "" "s/\\/Users\\/runner\\/work\\/ibex-lib\\/ibex-lib\\/ibex/\${_IMPORT_PREFIX}/" ibex/share/ibex/cmake/*.cmake ; fi # See https://stackoverflow.com/questions/12272065/sed-undefined-label-on-macos
-        zip -q -r ibex_${{ matrix.cfg.arch }}_${{ matrix.cfg.runtime }}.zip ibex
+        zip -q -r ibex_${{ matrix.cfg.arch }}_${{ matrix.cfg.runtime }}${{ matrix.cfg.config }}.zip ibex
       shell: bash
     - run: |
         cd packages/choco
@@ -114,9 +115,9 @@ jobs:
         mv -f ibex.$PACKAGE_VERSION.nupkg ../../../
         cd ../../..
         checksum -f=ibex.$PACKAGE_VERSION.nupkg -t=sha256
-        choco install -y -r --no-progress --ignore-dependencies -s . ibex --params "'/url:./ibex_${{ matrix.cfg.arch }}_${{ matrix.cfg.runtime }}.zip'"
+        choco install -y -r --no-progress --ignore-dependencies -s . ibex --params "'/url:./ibex_${{ matrix.cfg.arch }}_${{ matrix.cfg.runtime }}${{ matrix.cfg.config }}.zip'"
         if [ ${{ matrix.cfg.runtime }} != mingw11 ] || [ ${{ matrix.cfg.arch }} != x64 ]; then rm -Rf ibex.$PACKAGE_VERSION.nupkg ; fi # To avoid upload conflicts of the same file...
-        checksum -f=ibex_${{ matrix.cfg.arch }}_${{ matrix.cfg.runtime }}.zip -t=sha256
+        checksum -f=ibex_${{ matrix.cfg.arch }}_${{ matrix.cfg.runtime }}${{ matrix.cfg.config }}.zip -t=sha256
       shell: bash
       if: runner.os=='Windows'
     - run: |
@@ -133,8 +134,8 @@ jobs:
     - run: |
         rm -Rf ibex
         cd tests/test_ibex
-        cmake ${{ matrix.cfg.cmake_params }} .
-        cmake --build . --config Release
+        cmake ${{ matrix.cfg.cmake_params }} -D CMAKE_BUILD_TYPE=${{ matrix.cfg.config }} .
+        cmake --build . --config ${{ matrix.cfg.config }}
         file ./${{ matrix.cfg.test_config }}my_project
         ./${{ matrix.cfg.test_config }}my_project
       shell: bash
