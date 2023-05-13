@@ -74,7 +74,7 @@ def configure (conf):
 	if conf.options.DEBUG:
 		Logs.info("Enabling debug mode")
 		# note: -Wno-int-in-bool-context for Gaol (but unknown option by clang...)
-		flags = "-std=c++11 -O0 -g -pg -Wall -Wno-int-in-bool-context"
+		flags = "-std=c++11 -O0 -g -Wall -Wno-int-in-bool-context"
 		flags += " -fmessage-length=0"
 		conf.define ("DEBUG", 1)
 		conf.env.DEBUG = True

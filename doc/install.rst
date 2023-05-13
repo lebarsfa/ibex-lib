@@ -178,7 +178,7 @@ In particular, ``waf`` ``configure`` supports the following options:
                         
 --with-debug            Compile Ibex in debug mode 
                         
-                        Compiler optimizations are all discarded (``-O0``), low-level assertions in the code are activated and debug information is stored (``-g -pg``)
+                        Compiler optimizations are all discarded (``-O0``), low-level assertions in the code are activated and debug information is stored (``-g``)
                         
                         Once Ibex has been compiled with this option, you should also compile your executable in debug mode. If you use the ``makefile`` of ``examples/``, simply write:: 
 

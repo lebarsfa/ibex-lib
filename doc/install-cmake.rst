@@ -202,7 +202,7 @@ CMAKE_BUILD_TYPE        Ex: ``-DCMAKE_BUILD_TYPE=Debug``
                         Set the build mode either to ``Relase`` or ``Debug``. Default is ``Release``.
                         
                         In debug mode, compiler optimizations are all discarded (``-O0``), low-level assertions 
-                        in the code are activated and debug information is stored (``-g -pg``)
+                        in the code are activated and debug information is stored (``-g``)
                         
                         Once Ibex has been compiled with this option, you should also compile your executable
                         in debug mode. If you use the ``makefile`` of ``examples/``, simply write:: 
