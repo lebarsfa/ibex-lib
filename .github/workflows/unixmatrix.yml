@@ -96,8 +96,10 @@ jobs:
         cmake -E env CXXFLAGS="${{ matrix.cfg.cmake_flags }}" CFLAGS="${{ matrix.cfg.cmake_flags }}" cmake ${{ matrix.cfg.cmake_params }} -D INTERVAL_LIB=${{ matrix.cfg.ilib }} -D CMAKE_INSTALL_PREFIX=../ibex ..
         cmake --build . --config Release --target install
         cd ..
-        sed_param=s/\\/Users\\/runner\\/work\\/ibex-lib\\/ibex-lib\\/ibex/\\/usr\\/local/
-        if [ ${{ runner.os }} = macOS ]; then sed -i "" "$sed_param" ibex/share/ibex/cmake/*.cmake ; fi # See https://stackoverflow.com/questions/12272065/sed-undefined-label-on-macos
+        # Probably to remove if GAOL is installed using CMake...
+        if [ ${{ runner.os }} = Windows ]; then sed -i "s/D:\\/a\\/ibex-lib\\/ibex-lib\\/ibex/\${_IMPORT_PREFIX}/" ibex/share/ibex/cmake/*.cmake ; fi
+        if [ ${{ runner.os }} = Linux ]; then sed -i "s/\\/home\\/runner\\/work\\/ibex-lib\\/ibex-lib\\/ibex/\${_IMPORT_PREFIX}/" ibex/share/ibex/cmake/*.cmake ; fi
+        if [ ${{ runner.os }} = macOS ]; then sed -i "" "s/\\/Users\\/runner\\/work\\/ibex-lib\\/ibex-lib\\/ibex/\${_IMPORT_PREFIX}/" ibex/share/ibex/cmake/*.cmake ; fi # See https://stackoverflow.com/questions/12272065/sed-undefined-label-on-macos
         zip -q -r ibex_${{ matrix.cfg.arch }}_${{ matrix.cfg.runtime }}.zip ibex
       shell: bash
     - run: |
