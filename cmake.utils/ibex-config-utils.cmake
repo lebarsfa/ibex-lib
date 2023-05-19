@@ -355,7 +355,7 @@ function (CREATE_TARGET_IMPORT_AND_EXPORT libname libabspath cfgfilename_var)
     if (libabspath)
       generators_expression_replace_for_build (_path "${installpath}")
       set (CFG_CONTENT "${CFG_CONTENT}
-set_target_properties (${target} PROPERTIES IMPORTED_LOCATION ${_path})")
+set_target_properties (${target} PROPERTIES IMPORTED_LOCATION \"${_path}\")")
     endif ()
     if (CTIE_INCLUDE_DIRECTORIES)
       generators_expression_replace_for_build (_prop "${CTIE_INCLUDE_DIRECTORIES}")
