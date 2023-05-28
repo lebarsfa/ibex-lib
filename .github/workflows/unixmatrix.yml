@@ -107,6 +107,7 @@ jobs:
         sed_param=s/\<version\>2\<\\/version\>/\<version\>${PACKAGE_VERSION}\<\\/version\>/
         sed -i "$sed_param" ibex/ibex.nuspec
         sed_param=s/ibex-2/ibex-${PACKAGE_VERSION}/
+        sed -i "$sed_param" ibex/ibex.nuspec
         sed -i "$sed_param" ibex/tools/chocolateyinstall.ps1
         mv -f ibex ibex.$PACKAGE_VERSION
         cd ibex.$PACKAGE_VERSION

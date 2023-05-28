@@ -34,7 +34,7 @@ The following package parameters can be set:
 - `/NoRegistry` - Will not try to update Windows registry.
 To pass package parameters, use `--params "''"` (e.g. `choco install ibex --params "'/NoPath /NoRegistry'"`), and to install another binary package, try e.g.
 ```
-choco install -y --ignore-dependencies ibex --params "'/url:https://github.com/lebarsfa/ibex-lib/releases/download/ibex-2.8.9.20220812/ibex_x86_vc15.zip'"
+choco install -y --ignore-dependencies ibex --params "'/url:https://github.com/lebarsfa/ibex-lib/releases/download/ibex-2/ibex_x64_vc17.zip'"
 ```
     </description>
     <releaseNotes>https://github.com/lebarsfa/ibex-lib/releases</releaseNotes>
