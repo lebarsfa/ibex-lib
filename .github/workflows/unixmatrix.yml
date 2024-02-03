@@ -111,6 +111,8 @@ jobs:
         sed_param=s/ibex-2/ibex-${PACKAGE_VERSION}/
         sed -i "$sed_param" ibex/ibex.nuspec
         sed -i "$sed_param" ibex/tools/chocolateyinstall.ps1
+        sed_param=s/\\$CMakePackageVer\ =\ \"2\"/\\$CMakePackageVer\ =\ \"${SOFTWARE_VERSION}\"/
+        sed -i "$sed_param" ibex/tools/sharedVars.ps1
         mv -f ibex ibex.$PACKAGE_VERSION
         cd ibex.$PACKAGE_VERSION
         choco pack
