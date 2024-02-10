@@ -32,9 +32,9 @@ The following package parameters can be set:
 - `/urlX:URL` - Same as above, with X in [1,99], except this will not disable the installation of the MinGW libraries compatible with the corresponding MinGW Chocolatey package dependency.
 - `/checksumX:SHA256` - SHA256 checksum of the binary package specified by the `/urlX` parameter. If needed, use the standard parameter `choco install --ignore-checksums ...` for trusted sources.
 - `/InstallDir:INSTALLDIR` - Installation directory.
-- `/NoPath` - Will not try to update Windows `PATH`.
+- `/Path` - Will try to update Windows `PATH`.
 - `/NoRegistry` - Will not try to update Windows registry.
-To pass package parameters, use `--params "''"` (e.g. `choco install ibex --params "'/NoPath /NoRegistry'"`), and to install another binary package, try e.g.
+To pass package parameters, use `--params "''"` (e.g. `choco install ibex --params "'/Path /NoRegistry'"`), and to install another binary package, try e.g.
 ```
 choco install -y --ignore-dependencies ibex --params "'/url:https://github.com/lebarsfa/ibex-lib/releases/download/ibex-2/ibex_x64_vc17.zip'"
 ```
