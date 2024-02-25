@@ -12,15 +12,18 @@ REV=$6
 
 #sudo apt-get -y install dpkg-dev
 
+mkdir -p $DIST/$ARCH
 cd $DIST/$ARCH
 mkdir -p libibex-dev/usr
 cp -Rf ../../../ibex/* libibex-dev/usr/
+mkdir -p libibex-dev/DEBIAN
+cp -Rf ../../deb/control libibex-dev/DEBIAN/control
 sed_param=s/Version:\ .*/Version:\ ${VER}/  
 sed -i "$sed_param" libibex-dev/DEBIAN/control
 sed_param=s/Architecture:\ .*/Architecture:\ ${ARCH}/
 sed -i "$sed_param" libibex-dev/DEBIAN/control
-if [ "$DIST" = "focal" ] || [ "$(lsb_release -cs)" = "jammy" ]; then
-    sed_param=s/libgcc1/libgccs-1/  
+if [ "$DIST" = "xenial" ] || [ "$DIST" = "bionic" ] || [ "$DIST" = "buster" ]; then
+    sed_param=s/libgcc-s1/libgcc1/  
     sed -i "$sed_param" libibex-dev/DEBIAN/control
 fi
 chmod 775 libibex-dev/DEBIAN
