@@ -1,7 +1,7 @@
 #ifndef _IBEX_INTERVALLIBWRAPPER_H_
 #define _IBEX_INTERVALLIBWRAPPER_H_
 
-#include "gaol/gaol.h"
+#include "gaol/gaol"
 #include "gaol/gaol_interval.h"
 
 #define IBEX_INTERVAL_LIB_NEG_INFINITY (-GAOL_INFINITY)
