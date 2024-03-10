@@ -36,11 +36,13 @@ The following package parameters can be set:
 - `/NoRegistry` - Will not try to update Windows registry.
 To pass package parameters, use `--params "''"` (e.g. `choco install ibex --params "'/Path /NoRegistry'"`), and to install another binary package, try e.g.
 ```
+choco install -y chocolatey-core.extension
 choco install -y --ignore-dependencies ibex --params "'/url:https://github.com/lebarsfa/ibex-lib/releases/download/ibex-2/ibex_x64_vc17.zip'"
 ```
     </description>
     <releaseNotes>https://github.com/lebarsfa/ibex-lib/releases</releaseNotes>
     <dependencies>
+      <dependency id="chocolatey-core.extension" version="1.1.0" />
       <dependency id="mingw" version="[11.2.0.07112021]" />
     </dependencies>
   </metadata>
