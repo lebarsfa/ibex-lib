@@ -2,8 +2,7 @@
 
 @echo off
 
-rem choco install -y -r --no-progress wget zip winflexbison patch
-rem sed
+rem choco install -y -r --no-progress wget zip winflexbison patch sed
 
 rd /s /q "%ProgramFiles%\mathlib" "%ProgramFiles(x86)%\mathlib" "%ProgramFiles%\gaol" "%ProgramFiles(x86)%\gaol" "%ProgramFiles%\IBEX" "%ProgramFiles(x86)%\IBEX"
 cd P:\devel\GitHub
@@ -41,10 +40,10 @@ rem pause
 rem Due to sed error message mentionning cross-device link...
 cd /d C:
 
-sed -i "s/C:\\/Program Files (x86)\\/mathlib\\/lib/\${_IMPORT_PREFIX}\\/lib\\/ibex\\/3rd/" "%ProgramFiles(x86)%\IBEX\share\ibex\cmake\ibex-config-ultim.cmake"
-sed -i "s/C:\\/Program Files (x86)\\/mathlib\\/include/\${_IMPORT_PREFIX}\\/include\\/ibex\\/3rd/" "%ProgramFiles(x86)%\IBEX\share\ibex\cmake\ibex-config-ultim.cmake"
-sed -i "s/C:\\/Program Files (x86)\\/gaol\\/lib/\${_IMPORT_PREFIX}\\/lib\\/ibex\\/3rd/" "%ProgramFiles(x86)%\IBEX\share\ibex\cmake\ibex-config-gaol.cmake"
-sed -i "s/C:\\/Program Files (x86)\\/gaol\\/include/\${_IMPORT_PREFIX}\\/include\\/ibex\\/3rd/" "%ProgramFiles(x86)%\IBEX\share\ibex\cmake\ibex-config-gaol.cmake"
+sed -i "s/C:\/Program Files (x86)\/mathlib\/lib/\${_IMPORT_PREFIX}\/lib\/ibex\/3rd/" "%ProgramFiles(x86)%\IBEX\share\ibex\cmake\ibex-config-ultim.cmake"
+sed -i "s/C:\/Program Files (x86)\/mathlib\/include/\${_IMPORT_PREFIX}\/include\/ibex\/3rd/" "%ProgramFiles(x86)%\IBEX\share\ibex\cmake\ibex-config-ultim.cmake"
+sed -i "s/C:\/Program Files (x86)\/gaol\/lib/\${_IMPORT_PREFIX}\/lib\/ibex\/3rd/" "%ProgramFiles(x86)%\IBEX\share\ibex\cmake\ibex-config-gaol.cmake"
+sed -i "s/C:\/Program Files (x86)\/gaol\/include/\${_IMPORT_PREFIX}\/include\/ibex\/3rd/" "%ProgramFiles(x86)%\IBEX\share\ibex\cmake\ibex-config-gaol.cmake"
 
 cd "%ProgramFiles(x86)%"
 zip -q -r ibex_x86_vc15.zip ibex
