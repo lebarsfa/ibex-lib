@@ -52,7 +52,7 @@ jobs:
         docker run ${{ matrix.cfg.docker_flags }} -i -v "${PWD}/..:${PWD}/.." ${{ matrix.cfg.img }} /bin/bash -c "uname -a ; cat /etc/os-release ; cd ${PWD} && pwd && lsb_release -a ; \
         mkdir build ; cd build && \
         cmake -E env CXXFLAGS="${{ matrix.cfg.cmake_flags }}" CFLAGS="${{ matrix.cfg.cmake_flags }}" cmake ${{ matrix.cfg.cmake_params }} -D INTERVAL_LIB=${{ matrix.cfg.ilib }} -D CMAKE_INSTALL_PREFIX=../ibex .. && \
-        cmake --build . --config Release --target install && \
+        cmake --build . -j 4 --config Release --target install && \
         cd .. && \
         sed -i "s/\\\\/home\\\\/runner\\\\/work\\\\/ibex-lib\\\\/ibex-lib\\\\/ibex/\\\${_IMPORT_PREFIX}/" ibex/share/ibex/cmake/*.cmake && \
         zip -q -r ibex_${{ matrix.cfg.arch }}_${{ matrix.cfg.runtime }}.zip ibex && \
