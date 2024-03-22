@@ -4,27 +4,29 @@
 
 rem choco install -y -r --no-progress wget zip winflexbison patch sed
 
+for %%v in (15 16 17) do (
+
 rd /s /q "%ProgramFiles%\mathlib" "%ProgramFiles(x86)%\mathlib" "%ProgramFiles%\gaol" "%ProgramFiles(x86)%\gaol" "%ProgramFiles%\IBEX" "%ProgramFiles(x86)%\IBEX"
-cd P:\devel\GitHub
+cd /d P:\devel\GitHub
 
-rd /s /q mathlib_build_x86_vc15
-md mathlib_build_x86_vc15
-cd mathlib_build_x86_vc15
-cmake -G "Visual Studio 15" -A Win32 ..\mathlib
+rd /s /q mathlib_build_x86_vc%%v
+md mathlib_build_x86_vc%%v
+cd mathlib_build_x86_vc%%v
+cmake -G "Visual Studio %%v" -A Win32 ..\mathlib
 cmake --build . --config Release --target install
 cd ..
 
-rd /s /q gaol_build_x86_vc15
-md gaol_build_x86_vc15
-cd gaol_build_x86_vc15
-cmake -G "Visual Studio 15" -A Win32 ..\gaol
+rd /s /q gaol_build_x86_vc%%v
+md gaol_build_x86_vc%%v
+cd gaol_build_x86_vc%%v
+cmake -G "Visual Studio %%v" -A Win32 ..\gaol
 cmake --build . --config Release --target install
 cd ..
 
-rd /s /q ibex-lib_build_x86_vc15
-md ibex-lib_build_x86_vc15
-cd ibex-lib_build_x86_vc15
-cmake -E env CXXFLAGS=" /wd4267 /wd4244 /wd4305 /wd4996" CFLAGS=" /wd4267 /wd4244 /wd4305 /wd4996" cmake -G "Visual Studio 15" -A Win32 -D INTERVAL_LIB=gaol -D MATHLIB_DIR="%ProgramFiles(x86)%\\mathlib" -D GAOL_DIR="%ProgramFiles(x86)%\\gaol" ..\ibex-lib
+rd /s /q ibex-lib_build_x86_vc%%v
+md ibex-lib_build_x86_vc%%v
+cd ibex-lib_build_x86_vc%%v
+cmake -E env CXXFLAGS=" /wd4267 /wd4244 /wd4305 /wd4996" CFLAGS=" /wd4267 /wd4244 /wd4305 /wd4996" cmake -G "Visual Studio %%v" -A Win32 -D INTERVAL_LIB=gaol -D MATHLIB_DIR="%ProgramFiles(x86)%\\mathlib" -D GAOL_DIR="%ProgramFiles(x86)%\\gaol" ..\ibex-lib
 cmake --build . --config Release --target install
 cd ..
 
@@ -46,6 +48,9 @@ sed -i "s/C:\/Program Files (x86)\/gaol\/lib/\${_IMPORT_PREFIX}\/lib\/ibex\/3rd/
 sed -i "s/C:\/Program Files (x86)\/gaol\/include/\${_IMPORT_PREFIX}\/include\/ibex\/3rd/" "%ProgramFiles(x86)%\IBEX\share\ibex\cmake\ibex-config-gaol.cmake"
 
 cd "%ProgramFiles(x86)%"
-zip -q -r ibex_x86_vc15.zip ibex
+del /f /q ibex_x86_vc%%v.zip
+zip -q -r ibex_x86_vc%%v.zip ibex
+
+)
 
 pause
