@@ -44,8 +44,8 @@ jobs:
             - { os: windows-2019, shell: cmd, arch: x86, bitness: 32, runtime: mingw8, cmake_params: '-G "MinGW Makefiles"', cmake_flags: '-fPIC', ilib: 'filib', choco_flags: '--x86', desc: 'Windows MinGW 8.1.0 x86' }
             - { os: windows-2019, shell: cmd, arch: x64, bitness: 64, runtime: mingw7, cmake_params: '-G "MinGW Makefiles"', cmake_flags: '-fPIC', ilib: 'filib', desc: 'Windows MinGW 7.3.0 x64' }
             - { os: windows-2019, shell: cmd, arch: x86, bitness: 32, runtime: mingw7, cmake_params: '-G "MinGW Makefiles"', cmake_flags: '-fPIC', ilib: 'filib', choco_flags: '--x86', desc: 'Windows MinGW 7.3.0 x86' }
-            - { os: ubuntu-22.04, shell: bash, arch: amd64, bitness: 64, runtime: jammy, cmake_flags: '-fPIC', ilib: 'gaol', desc: 'Ubuntu 22.04' }
-            - { os: ubuntu-20.04, shell: bash, arch: amd64, bitness: 64, runtime: focal, cmake_flags: '-fPIC', ilib: 'gaol', desc: 'Ubuntu 20.04' }
+            - { os: ubuntu-22.04, shell: bash, arch: amd64, bitness: 64, runtime: jammy, cmake_flags: '-fPIC', ilib: 'gaol', deb: true, desc: 'Ubuntu 22.04 amd64' }
+            - { os: ubuntu-20.04, shell: bash, arch: amd64, bitness: 64, runtime: focal, cmake_flags: '-fPIC', ilib: 'gaol', deb: true, desc: 'Ubuntu 20.04 amd64' }
             - { os: macos-14, shell: bash, arch: arm64, bitness: 64, runtime: sonoma, cmake_params: '-D CMAKE_SYSTEM_NAME=Darwin -D CMAKE_OSX_ARCHITECTURES=arm64', cmake_flags: '-fPIC', ilib: 'gaol', desc: 'macOS Sonoma arm64' }
 #            - { os: macos-14, shell: bash, arch: x86_64, bitness: 64, runtime: sonoma, cmake_params: '-D CMAKE_SYSTEM_NAME=Darwin -D CMAKE_OSX_ARCHITECTURES=x86_64', cmake_flags: '-fPIC', ilib: 'filib', desc: 'macOS Sonoma x86_64' }
 #            - { os: macos-13, shell: bash, arch: arm64, bitness: 64, runtime: ventura, cmake_params: '-D CMAKE_SYSTEM_NAME=Darwin -D CMAKE_OSX_ARCHITECTURES=arm64', cmake_flags: '-fPIC', ilib: 'filib', desc: 'macOS Ventura arm64' }
@@ -57,7 +57,7 @@ jobs:
     - uses: actions/checkout@v4
       with:
         submodules: true
-        fetch-depth: 1
+        fetch-depth: 0
         clean: false
       # From https://github.com/Munkei/VersionFromGit.cmake/blob/master/VersionFromGit.cmake
     - run: echo "git_tag=`git describe --tags --abbrev=0`" >> $GITHUB_ENV
@@ -76,7 +76,7 @@ jobs:
       if: runner.os=='Windows'
     - run: echo "PACKAGE_VERSION=$SOFTWARE_VERSION-${DEBIAN_PACKAGE_REV}${{ matrix.cfg.runtime }}$PACKAGE_REV" >> $GITHUB_ENV
       shell: bash
-      if: runner.os=='Linux'
+      if: matrix.cfg.deb==true
     - run: |
         choco install -y -r --no-progress checksum wget zip make
         rem Workaround to try solve some random package download failures...
@@ -116,7 +116,7 @@ jobs:
         echo export BASHMINGWPATH=/c/ProgramData/mingw64/mingw${{ matrix.cfg.bitness }}/bin>>%USERPROFILE%\.bashrc
       if: (matrix.cfg.runtime=='mingw13')
     - run: sudo apt-get -q update ; sudo apt-get -y install flex bison dpkg-dev || true
-      if: runner.os=='Linux'
+      if: matrix.cfg.deb==true
     - run: |    
         if [ ${{ runner.os }} = Windows ]; then source ~/refreshenv.bashrc ; refreshenv ; export PATH=$BASHMINGWPATH:$PATH ; fi
         mkdir build ; cd build
@@ -153,12 +153,13 @@ jobs:
     - run: |
         cd packages
         chmod +x ./genlibibex-dev.sh
-        ./genlibibex-dev.sh ubuntu ${{ matrix.cfg.runtime }} ${{ matrix.cfg.arch }} $SOFTWARE_VERSION $DEBIAN_PACKAGE_REV $PACKAGE_REV
+        ./genlibibex-dev.sh $(lsb_release -is | tr [:upper:] [:lower:]) ${{ matrix.cfg.runtime }} $(dpkg --print-architecture) $SOFTWARE_VERSION $DEBIAN_PACKAGE_REV $PACKAGE_REV
         cd ..
-        sudo dpkg -i libibex-dev-$PACKAGE_VERSION\_${{ matrix.cfg.arch }}.deb
+        sudo dpkg -i libibex-dev-$PACKAGE_VERSION\_$(dpkg --print-architecture).deb
       shell: bash
-      if: runner.os=='Linux'
-    - run: sudo cp -Rf ibex/* /usr/local/
+      if: matrix.cfg.deb==true
+    - run: |
+        sudo cp -Rf ibex/* /usr/local/
       shell: bash
       if: runner.os=='macOS'
     - uses: xresloader/upload-to-github-release@v1
@@ -177,4 +178,5 @@ jobs:
         cmake --build . --config Release
         file ./${{ matrix.cfg.test_config }}my_project
         ./${{ matrix.cfg.test_config }}my_project
+        cd ../..
       shell: bash
