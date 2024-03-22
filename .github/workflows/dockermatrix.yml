@@ -1,0 +1,82 @@
+on:
+    push:
+        branches: '**'
+#        branches: 'master'
+        tags: '' # Restrict to blank tags
+    pull_request:
+
+jobs:
+ dockermatrix:
+    runs-on: ubuntu-latest
+    defaults:
+        run:
+            shell: ${{ matrix.cfg.shell }}
+    strategy:
+        fail-fast: false
+        matrix:
+            cfg:
+            - { img: 'lebarsfa/manylinux2014_x86_64-for-codac', shell: bash, arch: x86_64, bitness: 64, runtime: manylinux2014, cmake_flags: '-fPIC', ilib: 'gaol', desc: 'CentOS manylinux2014 x86_64' }
+            - { img: 'lebarsfa/manylinux2014_aarch64-for-codac', shell: bash, arch: aarch64, bitness: 64, runtime: manylinux2014, cmake_flags: '-fPIC', ilib: 'gaol', docker_flags: '--platform linux/arm64', desc: 'CentOS manylinux2014 aarch64' }
+            - { img: 'lebarsfa/pi-64:jammy-for-codac', shell: bash, arch: arm64, bitness: 64, runtime: jammy, cmake_flags: '-fPIC', ilib: 'gaol', deb: true, desc: 'Ubuntu 22.04 arm64' }
+            - { img: 'lebarsfa/pi-64:bookworm-for-codac', shell: bash, arch: arm64, bitness: 64, runtime: bookworm, cmake_flags: '-fPIC', ilib: 'gaol', deb: true, desc: 'Debian Bookworm arm64' }
+            - { img: 'lebarsfa/pi:bookworm-for-codac', shell: bash, arch: armhf, bitness: 32, runtime: bookworm, cmake_flags: '-fPIC', ilib: 'gaol', deb: true, desc: 'Raspbian Bookworm armv6hf' }
+            - { img: 'lebarsfa/pi:buster-for-codac', shell: bash, arch: armhf, bitness: 32, runtime: buster, cmake_flags: '-fPIC', ilib: 'gaol', deb: true, desc: 'Raspbian Buster armv6hf' }
+    name: ${{ matrix.cfg.desc }}
+    steps: 
+    - uses: actions/checkout@v4
+      with:
+        submodules: true
+        fetch-depth: 0
+        clean: false
+      # From https://github.com/Munkei/VersionFromGit.cmake/blob/master/VersionFromGit.cmake
+    - run: echo "git_tag=`git describe --tags --abbrev=0`" >> $GITHUB_ENV
+      shell: bash
+      # See https://askubuntu.com/questions/620533/what-is-the-meaning-of-the-xubuntuy-string-in-ubuntu-package-names
+    - run: |
+        #echo "SOFTWARE_VERSION=${git_tag:5}" >> $GITHUB_ENV
+        echo "SOFTWARE_VERSION=2.8.9.20240224" >> $GITHUB_ENV
+        echo "DEBIAN_PACKAGE_REV=0" >> $GITHUB_ENV
+        echo "PACKAGE_REV=0" >> $GITHUB_ENV
+        echo "CHOCO_PACKAGE_REV=" >> $GITHUB_ENV
+        echo "VERBOSE=1" >> $GITHUB_ENV
+      shell: bash
+    - run: echo "PACKAGE_VERSION=$SOFTWARE_VERSION-${DEBIAN_PACKAGE_REV}${{ matrix.cfg.runtime }}$PACKAGE_REV" >> $GITHUB_ENV
+      shell: bash
+      if: matrix.cfg.deb==true
+    - run: |
+        sudo apt-get -y install qemu binfmt-support qemu-user-static || true
+        #docker run --rm --privileged multiarch/qemu-user-static:register --reset
+        docker run --rm --privileged multiarch/qemu-user-static --reset -p yes
+      if: (matrix.cfg.arch!='x86_64')&&(matrix.cfg.arch!='i386')
+    - run: |
+        docker run ${{ matrix.cfg.docker_flags }} -i -v "${PWD}/..:${PWD}/.." ${{ matrix.cfg.img }} /bin/bash -c "uname -a ; cat /etc/os-release ; cd ${PWD} && pwd && lsb_release -a ; \
+        mkdir build ; cd build && \
+        cmake -E env CXXFLAGS="${{ matrix.cfg.cmake_flags }}" CFLAGS="${{ matrix.cfg.cmake_flags }}" cmake ${{ matrix.cfg.cmake_params }} -D INTERVAL_LIB=${{ matrix.cfg.ilib }} -D CMAKE_INSTALL_PREFIX=../ibex .. && \
+        cmake --build . --config Release --target install && \
+        cd .. && \
+        sed -i "s/\\\\/home\\\\/runner\\\\/work\\\\/ibex-lib\\\\/ibex-lib\\\\/ibex/\\\${_IMPORT_PREFIX}/" ibex/share/ibex/cmake/*.cmake && \
+        zip -q -r ibex_${{ matrix.cfg.arch }}_${{ matrix.cfg.runtime }}.zip ibex && \
+        if [ ${{ matrix.cfg.deb }} = true ]; then \
+        cd packages && \
+        chmod +x ./genlibibex-dev.sh && \
+        ./genlibibex-dev.sh \$(lsb_release -is | tr [:upper:] [:lower:]) ${{ matrix.cfg.runtime }} \$(dpkg --print-architecture) $SOFTWARE_VERSION $DEBIAN_PACKAGE_REV $PACKAGE_REV && \
+        cd .. && \
+        sudo dpkg -i libibex-dev-$PACKAGE_VERSION\_\$(dpkg --print-architecture).deb ; \
+        else \
+        sudo cp -Rf ibex/* /usr/local/ ; \
+        fi && \
+        rm -Rf ibex && \
+        cd tests/test_ibex && \
+        cmake ${{ matrix.cfg.cmake_params }} . && \
+        cmake --build . --config Release && \
+        file ./${{ matrix.cfg.test_config }}my_project && \
+        ./${{ matrix.cfg.test_config }}my_project && \
+        cd ../.."
+    - uses: xresloader/upload-to-github-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        file: "*.zip;*.deb"
+        overwrite: true
+        tag_name: autotagname-${{ github.sha }}
+      if: (github.event_name != 'pull_request')
