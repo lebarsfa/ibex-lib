@@ -4,30 +4,35 @@
 
 rem choco install -y -r --no-progress wget zip winflexbison patch sed
 
-for %%v in (15 16 17) do (
+for %%v in (11) do (
 
 rd /s /q "%ProgramFiles%\mathlib" "%ProgramFiles(x86)%\mathlib" "%ProgramFiles%\gaol" "%ProgramFiles(x86)%\gaol" "%ProgramFiles%\IBEX" "%ProgramFiles(x86)%\IBEX"
 cd /d P:\devel\GitHub
 
-rd /s /q mathlib_build_x64_vc%%v
-md mathlib_build_x64_vc%%v
-cd mathlib_build_x64_vc%%v
-cmake -G "Visual Studio %%v" -A x64 ..\mathlib
-cmake --build . --config Release --target install
+rd /s /q mathlib_build_x64_mingw%%v
+md mathlib_build_x64_mingw%%v
+cd mathlib_build_x64_mingw%%v
+cmake -E env CXXFLAGS="-fPIC" CFLAGS="-fPIC" cmake -G "MinGW Makefiles" -D CMAKE_INSTALL_PREFIX="%ProgramFiles%\mathlib" ..\mathlib
+cmake --build . -j 4 --config Release --target install
 cd ..
 
-rd /s /q gaol_build_x64_vc%%v
-md gaol_build_x64_vc%%v
-cd gaol_build_x64_vc%%v
-cmake -G "Visual Studio %%v" -A x64 ..\gaol
-cmake --build . --config Release --target install
+rd /s /q gaol_build_x64_mingw%%v
+md gaol_build_x64_mingw%%v
+cd gaol_build_x64_mingw%%v
+rem Temporary gaol_configuration.h, gaol_double_op.h, "-I .."...
+cmake -E env CXXFLAGS=" -I .. -fPIC" CFLAGS=" -I .. -fPIC" cmake -G "MinGW Makefiles" -D CMAKE_INSTALL_PREFIX="%ProgramFiles%\gaol" ..\gaol
+copy /Y /B ..\gaol\gaol\gaol_version_mingw.h+..\gaol\gaol\gaol_config_mingw.h gaol\gaol_configuration.h
+copy /Y ..\gaol\gaol\gaol_double_op_apmathlib.h gaol\gaol_double_op.h
+cmake --build . -j 4 --config Release --target install
+copy /Y gaol\gaol_configuration.h "%ProgramFiles%\gaol\include\gaol\"
+copy /Y gaol\gaol_double_op.h "%ProgramFiles%\gaol\include\gaol\"
 cd ..
 
-rd /s /q ibex-lib_build_x64_vc%%v
-md ibex-lib_build_x64_vc%%v
-cd ibex-lib_build_x64_vc%%v
-cmake -E env CXXFLAGS=" /wd4267 /wd4244 /wd4305 /wd4996" CFLAGS=" /wd4267 /wd4244 /wd4305 /wd4996" cmake -G "Visual Studio %%v" -A x64 -D INTERVAL_LIB=gaol -D MATHLIB_DIR="%ProgramFiles%\\mathlib" -D GAOL_DIR="%ProgramFiles%\\gaol" ..\ibex-lib
-cmake --build . --config Release --target install
+rd /s /q ibex-lib_build_x64_mingw%%v
+md ibex-lib_build_x64_mingw%%v
+cd ibex-lib_build_x64_mingw%%v
+cmake -E env CXXFLAGS="-fPIC" CFLAGS="-fPIC" cmake -G "MinGW Makefiles" -D INTERVAL_LIB=gaol -D MATHLIB_DIR="%ProgramFiles%\\mathlib" -D GAOL_DIR="%ProgramFiles%\\gaol" -D CMAKE_INSTALL_PREFIX="%ProgramFiles%\IBEX" ..\ibex-lib
+cmake --build . -j 4 --config Release --target install
 cd ..
 
 md "%ProgramFiles%\IBEX\include\ibex\3rd\gaol" "%ProgramFiles%\IBEX\lib\ibex\3rd"
@@ -48,8 +53,8 @@ sed -i "s/C:\/Program Files\/gaol\/lib/\${_IMPORT_PREFIX}\/lib\/ibex\/3rd/" "%Pr
 sed -i "s/C:\/Program Files\/gaol\/include/\${_IMPORT_PREFIX}\/include\/ibex\/3rd/" "%ProgramFiles%\IBEX\share\ibex\cmake\ibex-config-gaol.cmake"
 
 cd "%ProgramFiles%"
-del /f /q ibex_x64_vc%%v.zip
-zip -q -r ibex_x64_vc%%v.zip ibex
+del /f /q ibex_x64_mingw%%v.zip
+zip -q -r ibex_x64_mingw%%v.zip ibex
 
 )
 

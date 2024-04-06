@@ -3,10 +3,10 @@
 mkdir -p ~/Downloads/newibex
 
 sudo pip3 uninstall -y codac ; pip3 uninstall -y codac
-sudo rm -Rf /usr/local/include/mathlib* /usr/local/include/MathLib* /usr/local/lib/libultim*
-sudo rm -Rf /usr/local/include/gaol* /usr/local/lib/gaol* /usr/local/lib/libgaol*
-sudo rm -Rf /usr/local/include/ibex* /usr/local/lib/ibex* /usr/local/lib/libibex* /usr/local/bin/ibex*
-sudo rm -Rf /usr/local/include/codac* /usr/local/lib/libcodac*
+sudo rm -Rf /usr/local/include/mathlib* /usr/local/include/MathLib* /usr/local/lib/libultim* /usr/local/share/mathlib*
+sudo rm -Rf /usr/local/include/gaol* /usr/local/lib/gaol* /usr/local/lib/libgaol* /usr/local/share/gaol*
+sudo rm -Rf /usr/local/include/ibex* /usr/local/lib/ibex* /usr/local/lib/libibex* /usr/local/bin/ibex* /usr/local/share/ibex*
+sudo rm -Rf /usr/local/include/codac* /usr/local/lib/libcodac* /usr/local/share/codac*
 cd ~/Downloads/newibex
 rm -Rf ibex-lib*
 git clone -b prerelease https://github.com/lebarsfa/ibex-lib
@@ -18,10 +18,10 @@ mv -f ./ibex_arm64_monterey.zip ../
 cd ..
 
 sudo pip3 uninstall -y codac ; pip3 uninstall -y codac
-sudo rm -Rf /usr/local/include/mathlib* /usr/local/include/MathLib* /usr/local/lib/libultim*
-sudo rm -Rf /usr/local/include/gaol* /usr/local/lib/gaol* /usr/local/lib/libgaol*
-sudo rm -Rf /usr/local/include/ibex* /usr/local/lib/ibex* /usr/local/lib/libibex* /usr/local/bin/ibex*
-sudo rm -Rf /usr/local/include/codac* /usr/local/lib/libcodac*
+sudo rm -Rf /usr/local/include/mathlib* /usr/local/include/MathLib* /usr/local/lib/libultim* /usr/local/share/mathlib*
+sudo rm -Rf /usr/local/include/gaol* /usr/local/lib/gaol* /usr/local/lib/libgaol* /usr/local/share/gaol*
+sudo rm -Rf /usr/local/include/ibex* /usr/local/lib/ibex* /usr/local/lib/libibex* /usr/local/bin/ibex* /usr/local/share/ibex*
+sudo rm -Rf /usr/local/include/codac* /usr/local/lib/libcodac* /usr/local/share/codac*
 cd ~/Downloads/newibex
 rm -Rf ibex-lib*
 git clone -b prerelease https://github.com/lebarsfa/ibex-lib
