@@ -13,21 +13,21 @@ rd /s /q mathlib_build_x86_vc%%v
 md mathlib_build_x86_vc%%v
 cd mathlib_build_x86_vc%%v
 cmake -G "Visual Studio %%v" -A Win32 ..\mathlib
-cmake --build . --config Release --target install
+cmake --build . -j 4 --config Release --target install
 cd ..
 
 rd /s /q gaol_build_x86_vc%%v
 md gaol_build_x86_vc%%v
 cd gaol_build_x86_vc%%v
 cmake -G "Visual Studio %%v" -A Win32 ..\gaol
-cmake --build . --config Release --target install
+cmake --build . -j 4 --config Release --target install
 cd ..
 
 rd /s /q ibex-lib_build_x86_vc%%v
 md ibex-lib_build_x86_vc%%v
 cd ibex-lib_build_x86_vc%%v
 cmake -E env CXXFLAGS=" /wd4267 /wd4244 /wd4305 /wd4996" CFLAGS=" /wd4267 /wd4244 /wd4305 /wd4996" cmake -G "Visual Studio %%v" -A Win32 -D INTERVAL_LIB=gaol -D MATHLIB_DIR="%ProgramFiles(x86)%\\mathlib" -D GAOL_DIR="%ProgramFiles(x86)%\\gaol" ..\ibex-lib
-cmake --build . --config Release --target install
+cmake --build . -j 4 --config Release --target install
 cd ..
 
 md "%ProgramFiles(x86)%\IBEX\include\ibex\3rd\gaol" "%ProgramFiles(x86)%\IBEX\lib\ibex\3rd"

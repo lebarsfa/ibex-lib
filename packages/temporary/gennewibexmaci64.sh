@@ -11,7 +11,7 @@ cd ~/Downloads/newibex
 rm -Rf ibex-lib*
 git clone -b prerelease https://github.com/lebarsfa/ibex-lib
 cd ibex-lib
-export VERBOSE=1 ; mkdir build ; cd build && cmake -E env CXXFLAGS="-fPIC" CFLAGS="-fPIC" cmake -D INTERVAL_LIB=gaol -D CMAKE_OSX_DEPLOYMENT_TARGET=14.0 -D CMAKE_INSTALL_PREFIX=../ibex .. && cmake --build . --config Release --target install && cd ..
+export VERBOSE=1 ; mkdir build ; cd build && cmake -E env CXXFLAGS="-fPIC" CFLAGS="-fPIC" cmake -D INTERVAL_LIB=gaol -D CMAKE_OSX_DEPLOYMENT_TARGET=14.0 -D CMAKE_INSTALL_PREFIX=../ibex .. && cmake --build . -j 4 --config Release --target install && cd ..
 sed -i "" "s/\\/Users\\/user\\/Downloads\\/newibex\\/ibex-lib\\/ibex/\${_IMPORT_PREFIX}/" ibex/share/ibex/cmake/*.cmake
 zip -q -r ibex_x86_64_sonoma.zip ibex
 mv -f ./ibex_x86_64_sonoma.zip ../
