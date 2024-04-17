@@ -10,15 +10,15 @@
 namespace ibex {
 
 inline void fpu_round_down() {
-	round_downward();
+	gaol::round_downward();
 }
 
 inline void fpu_round_up() {
-	round_upward();
+	gaol::round_upward();
 }
 
 inline void fpu_round_near() {
-	round_nearest();
+	gaol::round_nearest();
 }
 
 inline double previous_float(double x) {
