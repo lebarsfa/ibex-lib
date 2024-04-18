@@ -7,7 +7,7 @@
     <owners>lebarsfa</owners>
     <title>IBEX</title>
     <authors>IBEX Team</authors>
-    <projectUrl>http://www.ibex-lib.org/</projectUrl>
+    <projectUrl>https://github.com/ibex-team/ibex-lib</projectUrl>
     <iconUrl>https://cdn.statically.io/gh/lebarsfa/Packages/23ed816/choco/icons/IBEX_small_rvb.png</iconUrl>
     <licenseUrl>https://github.com/ibex-team/ibex-lib/blob/master/LICENSE</licenseUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
