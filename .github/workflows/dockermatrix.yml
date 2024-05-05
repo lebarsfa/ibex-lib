@@ -55,7 +55,7 @@ jobs:
         sudo apt-get -y install qemu binfmt-support qemu-user-static || true
         #docker run --rm --privileged multiarch/qemu-user-static:register --reset
         docker run --rm --privileged multiarch/qemu-user-static --reset -p yes
-      if: (matrix.cfg.arch!='x86_64')&&(matrix.cfg.arch!='i386')
+      if: (matrix.cfg.arch!='amd64')&&(matrix.cfg.arch!='x86_64')&&(matrix.cfg.arch!='i386')
     - run: |
         docker run ${{ matrix.cfg.docker_flags }} -i -v "${PWD}/..:${PWD}/.." ${{ matrix.cfg.img }} /bin/bash -c "uname -a ; cat /etc/os-release ; lsb_release -a ; cd ${PWD} && pwd && \
         mkdir build ; cd build && \
