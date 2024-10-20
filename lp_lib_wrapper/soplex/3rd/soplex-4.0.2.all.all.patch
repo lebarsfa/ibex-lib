@@ -11,3 +11,35 @@
  else
  		@echo "no installation directory specified - use make install INSTALLDIR=<dir>, e.g., make install INSTALLDIR=/usr/local"
  endif
+--- soplex-4.0.2/src/soplex/datahashtable.h	Fri Jun 28 15:48:00 2019
++++ soplex-4.0.2/src/soplex/datahashtable.h	Sun Oct 20 16:43:46 2024
+@@ -19,7 +19,9 @@
+ #ifndef _DATAHASHTABLE_H_
+ #define _DATAHASHTABLE_H_
+ 
++#include <algorithm>
+ #include <iostream>
++#include <iterator>
+ #include <assert.h>
+ #include <limits.h>
+ 
+@@ -344,7 +346,7 @@
+       m_memfactor = base.m_memfactor;
+       m_used = base.m_used;
+       m_hashsize = base.m_hashsize;
+-      primes = base.primes;
++      std::copy(std::begin(base.primes), std::end(base.primes), std::begin(primes));
+       nprimes = base.nprimes;
+ 
+       assert(m_memfactor > 1.0);
+@@ -359,9 +361,9 @@
+       , m_memfactor(base.m_memfactor)
+       , m_used(base.m_used)
+       , m_hashsize(base.m_hashsize)
+-      , primes(base.primes)
+       , nprimes(base.nprimes)
+    {
++      std::copy(std::begin(base.primes), std::end(base.primes), std::begin(primes));
+       assert(m_memfactor > 1.0);
+       assert(isConsistent());
+    }
