@@ -1,7 +1,7 @@
 ################################################################################
 # Options
 ################################################################################
-set (SOPLEX_DIR "" CACHE PATH "Path to the Soplex lib and include directories")
+set (SOPLEX_DIR "" CACHE PATH "Path to the SoPlex lib and include directories")
 
 ################################################################################
 # May be needed to install missing dependencies
@@ -22,7 +22,7 @@ if (SOPLEX_INCDIR AND SOPLEX_LIB)
                                           NAMESPACE Ibex::
                                           INCLUDE_DIRECTORIES ${SOPLEX_INCDIR})
 else ()
-  message (STATUS "Will install and use library Filib from 3rd/ subdirectory")
+  message (STATUS "Will install and use library SoPlex from 3rd/ subdirectory")
   # The installation of soplex via CMake does not work for us (linking error
   # when compiling ibexsolve)
   set (SOPLEX_PATCH "${CMAKE_CURRENT_SOURCE_DIR}/3rd/soplex-4.0.2.all.all.patch")
