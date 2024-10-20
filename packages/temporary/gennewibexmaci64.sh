@@ -2,7 +2,7 @@
 
 mkdir -p ~/Downloads/newibex
 
-sudo pip3 uninstall -y codac ; pip3 uninstall -y codac
+sudo pip3 uninstall --break-system-packages -y codac ; sudo pip3 uninstall -y codac ; pip3 uninstall -y codac
 sudo rm -Rf /usr/local/include/mathlib* /usr/local/include/MathLib* /usr/local/lib/libultim* /usr/local/share/mathlib*
 sudo rm -Rf /usr/local/include/gaol* /usr/local/lib/gaol* /usr/local/lib/libgaol* /usr/local/share/gaol*
 sudo rm -Rf /usr/local/include/ibex* /usr/local/lib/ibex* /usr/local/lib/libibex* /usr/local/bin/ibex* /usr/local/share/ibex*
@@ -17,7 +17,7 @@ zip -q -r ibex_x86_64_sonoma.zip ibex
 mv -f ./ibex_x86_64_sonoma.zip ../
 cd ..
 
-sudo pip3 uninstall -y codac ; pip3 uninstall -y codac
+sudo pip3 uninstall --break-system-packages -y codac ; sudo pip3 uninstall -y codac ; pip3 uninstall -y codac
 sudo rm -Rf /usr/local/include/mathlib* /usr/local/include/MathLib* /usr/local/lib/libultim* /usr/local/share/mathlib*
 sudo rm -Rf /usr/local/include/gaol* /usr/local/lib/gaol* /usr/local/lib/libgaol* /usr/local/share/gaol*
 sudo rm -Rf /usr/local/include/ibex* /usr/local/lib/ibex* /usr/local/lib/libibex* /usr/local/bin/ibex* /usr/local/share/ibex*
