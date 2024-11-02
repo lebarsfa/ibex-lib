@@ -19,7 +19,7 @@ cd ..
 rd /s /q gaol_build_x64_vc%%v
 md gaol_build_x64_vc%%v
 cd gaol_build_x64_vc%%v
-cmake -G "Visual Studio %%v" -A x64 ..\gaol
+cmake -G "Visual Studio %%v" -A x64 -D GAOL_ENABLE_PRESERVE_ROUNDING=OFF -D GAOL_ENABLE_OPTIMIZE=ON -D GAOL_ENABLE_VERBOSE_MODE=OFF ..\gaol
 cmake --build . -j 4 --config Release --target install
 cd ..
 
@@ -32,6 +32,7 @@ cd ..
 
 md "%ProgramFiles%\IBEX\include\ibex\3rd\gaol" "%ProgramFiles%\IBEX\lib\ibex\3rd"
 copy "%ProgramFiles%\mathlib\include\*" "%ProgramFiles%\IBEX\include\ibex\3rd"
+copy "%ProgramFiles%\gaol\include\mathlib*" "%ProgramFiles%\IBEX\include\ibex\3rd"
 copy "%ProgramFiles%\gaol\include\gaol" "%ProgramFiles%\IBEX\include\ibex\3rd\gaol"
 copy "%ProgramFiles%\mathlib\lib\*" "%ProgramFiles%\IBEX\lib\ibex\3rd"
 copy "%ProgramFiles%\gaol\lib\*" "%ProgramFiles%\IBEX\lib\ibex\3rd"

@@ -19,13 +19,8 @@ cd ..
 rd /s /q gaol_build_x64_mingw%%v
 md gaol_build_x64_mingw%%v
 cd gaol_build_x64_mingw%%v
-rem Temporary gaol_configuration.h, gaol_double_op.h, "-I .."...
-cmake -E env CXXFLAGS=" -I .. -fPIC" CFLAGS=" -I .. -fPIC" cmake -G "MinGW Makefiles" -D CMAKE_INSTALL_PREFIX="%ProgramFiles%\gaol" ..\gaol
-copy /Y /B ..\gaol\gaol\gaol_version_mingw.h+..\gaol\gaol\gaol_config_mingw.h gaol\gaol_configuration.h
-copy /Y ..\gaol\gaol\gaol_double_op_apmathlib.h gaol\gaol_double_op.h
+cmake -E env CXXFLAGS="-fPIC" CFLAGS="-fPIC" cmake -G "MinGW Makefiles" -D GAOL_ENABLE_PRESERVE_ROUNDING=OFF -D GAOL_ENABLE_OPTIMIZE=ON -D GAOL_ENABLE_VERBOSE_MODE=OFF -D CMAKE_INSTALL_PREFIX="%ProgramFiles%\gaol" ..\gaol
 cmake --build . -j 4 --config Release --target install
-copy /Y gaol\gaol_configuration.h "%ProgramFiles%\gaol\include\gaol\"
-copy /Y gaol\gaol_double_op.h "%ProgramFiles%\gaol\include\gaol\"
 cd ..
 
 rd /s /q ibex-lib_build_x64_mingw%%v
@@ -37,6 +32,7 @@ cd ..
 
 md "%ProgramFiles%\IBEX\include\ibex\3rd\gaol" "%ProgramFiles%\IBEX\lib\ibex\3rd"
 copy "%ProgramFiles%\mathlib\include\*" "%ProgramFiles%\IBEX\include\ibex\3rd"
+copy "%ProgramFiles%\gaol\include\mathlib*" "%ProgramFiles%\IBEX\include\ibex\3rd"
 copy "%ProgramFiles%\gaol\include\gaol" "%ProgramFiles%\IBEX\include\ibex\3rd\gaol"
 copy "%ProgramFiles%\mathlib\lib\*" "%ProgramFiles%\IBEX\lib\ibex\3rd"
 copy "%ProgramFiles%\gaol\lib\*" "%ProgramFiles%\IBEX\lib\ibex\3rd"
