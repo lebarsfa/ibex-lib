@@ -1,4 +1,5 @@
-cmake_minimum_required(VERSION 3.0.2)
+cmake_minimum_required(VERSION 3.14...3.25)
+#cmake_minimum_required(VERSION 3.0.2)
   project(my_project LANGUAGES CXX)
 
   find_package(IBEX REQUIRED)
