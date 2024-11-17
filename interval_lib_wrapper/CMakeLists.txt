@@ -1,10 +1,6 @@
 subdir_list (INTERVAL_LIB_LIST RELATIVE)
 
-if(WIN32)
-  set(INTERVAL_LIB "filib" CACHE STRING "Library used for interval arithmetic")
-else()
-  set(INTERVAL_LIB "gaol" CACHE STRING "Library used for interval arithmetic")
-endif()
+set(INTERVAL_LIB "gaol" CACHE STRING "Library used for interval arithmetic")
 set_property(CACHE INTERVAL_LIB PROPERTY STRINGS ${INTERVAL_LIB_LIST})
 
 list(FIND INTERVAL_LIB_LIST ${INTERVAL_LIB} is_valid)
