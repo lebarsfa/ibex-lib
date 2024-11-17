@@ -94,7 +94,11 @@ else {
 
 if (!$pp['NoRegistry']) {
 	New-Item "$CMakeSystemRepositoryPath\$CMakePackageName" -ItemType directory -Force
-	New-ItemProperty -Name "$CMakePackageName$CMakePackageVer`_$arch" -PropertyType String -Value "$root\share\$CMakePackageName\cmake" -Path "$CMakeSystemRepositoryPath\$CMakePackageName" -Force
+	New-ItemProperty -Name "$CMakePackageName$CMakePackageVer`_$arch" -PropertyType String -Value "$root\share\cmake" -Path "$CMakeSystemRepositoryPath\$CMakePackageName" -Force
+	New-Item "$CMakeSystemRepositoryPath\gaol" -ItemType directory -Force
+	New-ItemProperty -Name "gaol`_$arch" -PropertyType String -Value "$root\share\cmake" -Path "$CMakeSystemRepositoryPath\gaol" -Force
+	New-Item "$CMakeSystemRepositoryPath\mathlib" -ItemType directory -Force
+	New-ItemProperty -Name "mathlib`_$arch" -PropertyType String -Value "$root\share\cmake" -Path "$CMakeSystemRepositoryPath\mathlib" -Force
 }
 $pathtoadd = "$root\bin"
 if (($pp['Path']) -and !([environment]::GetEnvironmentVariable("Path","Machine") -match [regex]::escape($pathtoadd))) {
@@ -161,7 +165,11 @@ for ($i = 1; $i -le 99; $i++) {
 
 		if (!$pp['NoRegistry']) {
 			New-Item "$CMakeSystemRepositoryPath\$CMakePackageName" -ItemType directory -Force
-			New-ItemProperty -Name "$CMakePackageName$CMakePackageVer`_$arch" -PropertyType String -Value "$root\share\$CMakePackageName\cmake" -Path "$CMakeSystemRepositoryPath\$CMakePackageName" -Force
+			New-ItemProperty -Name "$CMakePackageName$CMakePackageVer`_$arch" -PropertyType String -Value "$root\share\cmake" -Path "$CMakeSystemRepositoryPath\$CMakePackageName" -Force
+			New-Item "$CMakeSystemRepositoryPath\gaol" -ItemType directory -Force
+			New-ItemProperty -Name "gaol`_$arch" -PropertyType String -Value "$root\share\cmake" -Path "$CMakeSystemRepositoryPath\gaol" -Force
+			New-Item "$CMakeSystemRepositoryPath\mathlib" -ItemType directory -Force
+			New-ItemProperty -Name "mathlib`_$arch" -PropertyType String -Value "$root\share\cmake" -Path "$CMakeSystemRepositoryPath\mathlib" -Force
 		}
 		$pathtoadd = "$root\bin"
 		if (($pp['Path']) -and !([environment]::GetEnvironmentVariable("Path","Machine") -match [regex]::escape($pathtoadd))) {

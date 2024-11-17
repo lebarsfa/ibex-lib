@@ -18,13 +18,36 @@ list (APPEND CMAKE_MODULE_PATH "${MODULE_DIR}")
 # Run common init function and install the module so plugins can use it
 ################################################################################
 message (STATUS "Configuring Ibex ${IBEX_VERSION}")
-include (ibex-config-utils)
+include(FetchContent)
+include (IBEXTargets-utils)
 ibex_init_common ()
 
 ################################################################################
 # Configure the libraries for interval arithmetic and linear programming
 ################################################################################
+
+
 add_subdirectory (interval_lib_wrapper)
+# if (MATHLIB_DIR and GAOL_DIR) or IBEX_DISABLE_FIND_PACKAGE are set, call
+# ?
+#otherwise
+find_package(gaol QUIET)
+if(gaol_FOUND)
+	message(STATUS "Found gaol version ${gaol_VERSION} in ${gaol_DIR}")
+else()
+	message(STATUS "Attempt to install gaol automatically...")
+	set(GAOL_ENABLE_PRESERVE_ROUNDING OFF CACHE BOOL "Transparently manipulates the FPU control flags")
+	set(GAOL_ENABLE_OPTIMIZE ON CACHE BOOL "Compile gaol with full optimization")
+	set(GAOL_ENABLE_VERBOSE_MODE OFF CACHE BOOL "Use verbose mode")
+	#FetchContent_Declare(gaol URL https://github.com/lebarsfa/gaol/archive/refs/heads/master.zip)
+	FetchContent_Declare(gaol URL https://github.com/lebarsfa/gaol/archive/refs/heads/dev.zip)
+	#FetchContent_Declare(gaol SOURCE_DIR "P:/devel/GitHub/GAOL")
+	FetchContent_MakeAvailable(gaol)
+	# Adds gaol::gaol
+endif()
+  
+add_library(Ibex::gaol ALIAS gaol)
+
 add_subdirectory (lp_lib_wrapper)
 
 ################################################################################
@@ -53,7 +76,7 @@ add_make_target_for_ctest (check)
 # Specifically, we want this to be run after the line
 # install (EXPORT ibex...
 # from src/CMakeLists.txt because this line can, in some cases, remove files
-# matching ${CMAKE_INSTALL_CONFIGCMAKE}/ibex-config-*.cmake even if they were
+# matching ${CMAKE_INSTALL_CONFIGCMAKE}/IBEXTargets-*.cmake even if they were
 # just installed.
 ################################################################################
 add_subdirectory (cmake.install)

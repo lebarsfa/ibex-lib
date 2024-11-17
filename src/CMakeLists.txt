@@ -2,6 +2,7 @@
 # libibex
 ################################################################################
 add_library (ibex "")
+add_library (Ibex::ibex ALIAS ibex)
 
 target_include_directories (ibex PUBLIC "$<BUILD_INTERFACE:${IBEX_INCDIRS}>")
 
@@ -101,19 +102,26 @@ install (FILES ${IBEX_MAIN_HEADER} DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
 list_filter (IBEX_SRC_INSTALLABLE "\\.(h|hpp|inl)$" ${IBEX_SRC})
 install (FILES ${IBEX_SRC_INSTALLABLE}
           DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/ibex COMPONENT devtools)
+  
+# Inspired from https://github.com/fmtlib/fmt/blob/7d4662f7ab39f70107b6e8899bcc4076fe947a39/CMakeLists.txt
+export(TARGETS ibex NAMESPACE Ibex::
+        FILE IBEXTargets.cmake)
 
-# export ibex target in ibex-config.cmake
-install (EXPORT ibexExport FILE ibex-config.cmake
+# export ibex target in IBEXTargets.cmake
+install (EXPORT ibexExport FILE IBEXTargets.cmake
                            NAMESPACE Ibex::
                            DESTINATION ${CMAKE_INSTALL_CONFIGCMAKE}
                            COMPONENT devtools)
 
 # export companion file for version
 include (CMakePackageConfigHelpers)
-set (VERSION_FILE "${CMAKE_CURRENT_BINARY_DIR}/ibex-config-version.cmake")
+set (VERSION_FILE "${CMAKE_CURRENT_BINARY_DIR}/IBEXConfigVersion.cmake")
 write_basic_package_version_file (${VERSION_FILE} COMPATIBILITY AnyNewerVersion)
-install (FILES ${VERSION_FILE} DESTINATION ${CMAKE_INSTALL_CONFIGCMAKE}
-                                                            COMPONENT devtools)
+
+configure_file("${MODULE_DIR}/IBEXConfig.cmake.in" IBEXConfig.cmake @ONLY)
+install(FILES "${CMAKE_CURRENT_BINARY_DIR}/IBEXConfig.cmake" ${VERSION_FILE} 
+        DESTINATION ${CMAKE_INSTALL_CONFIGCMAKE}
+        COMPONENT devtools)
 
 ################################################################################
 # binaries

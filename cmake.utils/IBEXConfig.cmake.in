@@ -1,0 +1,26 @@
+include(CMakeFindDependencyMacro)
+
+# Capturing values from configure (optional)
+#set(my-config-var @my-config-var@)
+
+set(INTERVAL_LIB @INTERVAL_LIB@)
+find_package(${INTERVAL_LIB} REQUIRED)
+if(${INTERVAL_LIB}_FOUND)
+  message(STATUS "Found ${INTERVAL_LIB} version ${${INTERVAL_LIB}_VERSION} in ${${INTERVAL_LIB}_DIR}")
+endif()
+
+set(LP_LIB @LP_LIB@)
+if(NOT "${LP_LIB}" STREQUAL "none")
+  find_package(${LP_LIB} REQUIRED)
+  if(${LP_LIB}_FOUND)
+    message(STATUS "Found ${LP_LIB} version ${${LP_LIB}_VERSION} in ${${LP_LIB}_DIR}")
+  endif()
+endif()
+
+# Same syntax as find_package
+#find_dependency(MYDEP REQUIRED)
+
+# Any extra setup
+
+# Add the targets file
+include("${CMAKE_CURRENT_LIST_DIR}/IBEXTargets.cmake")
