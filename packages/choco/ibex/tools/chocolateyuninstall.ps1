@@ -20,6 +20,10 @@ $newpath = ($newpath.Split(';') | Where-Object { $_ -ne "$root\bin" }) -join ';'
 [environment]::SetEnvironmentVariable("Path",$newpath,"Machine")
 
 try {
+    Get-ItemProperty -Path $CMakeSystemRepositoryPath\mathlib | Select-Object -ExpandProperty "mathlib`_$arch" -ErrorAction Stop | Out-Null
+    Remove-ItemProperty -Path $CMakeSystemRepositoryPath\mathlib -Name "mathlib`_$arch"
+    Get-ItemProperty -Path $CMakeSystemRepositoryPath\gaol | Select-Object -ExpandProperty "gaol`_$arch" -ErrorAction Stop | Out-Null
+    Remove-ItemProperty -Path $CMakeSystemRepositoryPath\gaol -Name "gaol`_$arch"
     Get-ItemProperty -Path $CMakeSystemRepositoryPath\$CMakePackageName | Select-Object -ExpandProperty "$CMakePackageName$CMakePackageVer`_$arch" -ErrorAction Stop | Out-Null
     Remove-ItemProperty -Path $CMakeSystemRepositoryPath\$CMakePackageName -Name "$CMakePackageName$CMakePackageVer`_$arch"
 }

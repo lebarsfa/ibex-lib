@@ -66,7 +66,7 @@ set (incdirs "${CMAKE_CURRENT_SOURCE_DIR}" "${CMAKE_CURRENT_BINARY_DIR}")
 target_include_directories (prim PUBLIC "$<BUILD_INTERFACE:${incdirs}>")
 target_include_directories (prim PUBLIC "$<INSTALL_INTERFACE:$<INSTALL_PREFIX>/${CMAKE_INSTALL_INCLUDEDIR}>")
 
-# See also flags in ibex-config-utils.cmake...
+# See also flags in IBEXTargets-utils.cmake...
 
 # install headers
 install(DIRECTORY ieee fp_traits interval rounding_control COMPONENT devtools

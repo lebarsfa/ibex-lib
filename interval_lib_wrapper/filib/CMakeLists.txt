@@ -14,7 +14,7 @@ find_header_custom (FILIB "interval/interval.hpp" PATHS "${FILIB_DIR}")
 # Looking for prim library, result is written in FILIB_LIB
 find_library_custom (FILIB "prim" PATHS "${FILIB_DIR}")
 
-# See also flags in ibex-config-utils.cmake...
+# See also flags in IBEXTargets-utils.cmake...
 
 if (FILIB_INCDIR AND FILIB_LIB)
   create_target_import_and_export (prim ${FILIB_LIB} FILIB_EXPORTFILE

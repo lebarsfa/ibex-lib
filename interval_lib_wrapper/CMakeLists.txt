@@ -1,6 +1,10 @@
 subdir_list (INTERVAL_LIB_LIST RELATIVE)
 
-set(INTERVAL_LIB "gaol" CACHE STRING "Library used for interval arithmetic")
+if(WIN32)
+  set(INTERVAL_LIB "filib" CACHE STRING "Library used for interval arithmetic")
+else()
+  set(INTERVAL_LIB "gaol" CACHE STRING "Library used for interval arithmetic")
+endif()
 set_property(CACHE INTERVAL_LIB PROPERTY STRINGS ${INTERVAL_LIB_LIST})
 
 list(FIND INTERVAL_LIB_LIST ${INTERVAL_LIB} is_valid)
@@ -14,7 +18,9 @@ endif ()
 set (ITVLIB_ABSPATH ${CMAKE_CURRENT_SOURCE_DIR}/${INTERVAL_LIB})
 
 # Go into wrapper directory
-add_subdirectory (${INTERVAL_LIB})
+
+# if (MATHLIB_DIR and GAOL_DIR) or IBEX_DISABLE_FIND_PACKAGE are set, call
+#add_subdirectory (${INTERVAL_LIB})
 
 # Check that mandatory files exist and add them in IBEX_SRC
 set (ITVLIB_REQUIRED_FILES ibex_IntervalLibWrapper.cpp ibex_IntervalLibWrapper.h

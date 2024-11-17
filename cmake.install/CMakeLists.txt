@@ -1,2 +1,2 @@
-install (FILES "${MODULE_DIR}/ibex-config-utils.cmake" ${EXPORTFILES}
+install (FILES "${MODULE_DIR}/IBEXTargets-utils.cmake" ${EXPORTFILES}
           DESTINATION ${CMAKE_INSTALL_CONFIGCMAKE} COMPONENT devtools)
