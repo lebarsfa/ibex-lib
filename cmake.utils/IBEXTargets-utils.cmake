@@ -349,7 +349,7 @@ function (CREATE_TARGET_IMPORT_AND_EXPORT libname libabspath cfgfilename_var)
   # export the target
   ##############################################################################
   if (NOT CTIE_NO_EXPORT)
-    set (CFG_FILENAME ${CMAKE_CURRENT_BINARY_DIR}/ibex-config-${libname}.cmake)
+    set (CFG_FILENAME ${CMAKE_CURRENT_BINARY_DIR}/IBEXTargets-${libname}.cmake)
     # FIXME do we really need global ?
     set (CFG_CONTENT "add_library (${target} ${libtype} IMPORTED GLOBAL)")
     if (libabspath)
@@ -425,7 +425,7 @@ function (IBEX_INIT_COMMON)
 
   set (CMAKE_INSTALL_INCLUDEDIR_3RD ${CMAKE_INSTALL_INCLUDEDIR}/ibex/3rd PARENT_SCOPE)
   set (CMAKE_INSTALL_LIBDIR_3RD ${CMAKE_INSTALL_LIBDIR}/ibex/3rd PARENT_SCOPE)
-  set (CMAKE_INSTALL_CONFIGCMAKE "share/ibex/cmake" PARENT_SCOPE)
+  set (CMAKE_INSTALL_CONFIGCMAKE "share/cmake/ibex" PARENT_SCOPE)
 
   ##############################################################################
   # Print information (to ease debugging)

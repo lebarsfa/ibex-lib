@@ -12,7 +12,7 @@ rm -Rf ibex-lib*
 git clone -b prerelease https://github.com/lebarsfa/ibex-lib
 cd ibex-lib
 export VERBOSE=1 ; mkdir build ; cd build && cmake -E env CXXFLAGS="-fPIC" CFLAGS="-fPIC" cmake -D INTERVAL_LIB=gaol -D CMAKE_OSX_DEPLOYMENT_TARGET=13.0 -D CMAKE_INSTALL_PREFIX=../ibex .. && cmake --build . -j 4 --config Release --target install && cd ..
-sed -i "" "s/\\/Users\\/user\\/Downloads\\/newibex\\/ibex-lib\\/ibex/\${_IMPORT_PREFIX}/" ibex/share/ibex/cmake/*.cmake
+sed -i "" "s/\\/Users\\/user\\/Downloads\\/newibex\\/ibex-lib\\/ibex/\${_IMPORT_PREFIX}/" ibex/share/cmake/ibex/*.cmake
 zip -q -r ibex_arm64_ventura.zip ibex
 mv -f ./ibex_arm64_ventura.zip ../
 cd ..
