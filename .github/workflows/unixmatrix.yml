@@ -28,30 +28,30 @@ jobs:
         fail-fast: false
         matrix:
             cfg:
-            - { os: windows-2022, shell: cmd, arch: x64, bitness: 64, runtime: vc17, cmake_params: '-G "Visual Studio 17" -T v143 -A x64', cmake_flags: ' /wd4267 /wd4244 /wd4305 /wd4996', test_config: 'Release/', ilib: 'gaol', desc: 'Windows Visual Studio 2022 x64' }
-            - { os: windows-2022, shell: cmd, arch: x86, bitness: 32, runtime: vc17, cmake_params: '-G "Visual Studio 17" -T v143 -A Win32', cmake_flags: ' /wd4267 /wd4244 /wd4305 /wd4996', test_config: 'Release/', ilib: 'gaol', choco_flags: '--x86', desc: 'Windows Visual Studio 2022 x86' }
-            - { os: windows-2022, shell: cmd, arch: x64, bitness: 64, runtime: vc16, cmake_params: '-G "Visual Studio 17" -T v142 -A x64', cmake_flags: ' /wd4267 /wd4244 /wd4305 /wd4996', test_config: 'Release/', ilib: 'gaol', desc: 'Windows Visual Studio 2019 x64' }
-            - { os: windows-2022, shell: cmd, arch: x86, bitness: 32, runtime: vc16, cmake_params: '-G "Visual Studio 17" -T v142 -A Win32', cmake_flags: ' /wd4267 /wd4244 /wd4305 /wd4996', test_config: 'Release/', ilib: 'gaol', choco_flags: '--x86', desc: 'Windows Visual Studio 2019 x86' }
-            - { os: windows-2019, shell: cmd, arch: x64, bitness: 64, runtime: vc15, cmake_params: '-G "Visual Studio 16" -T v141 -A x64', cmake_flags: ' /wd4267 /wd4244 /wd4305 /wd4996', test_config: 'Release/', ilib: 'gaol', desc: 'Windows Visual Studio 2017 x64' }
-            - { os: windows-2019, shell: cmd, arch: x86, bitness: 32, runtime: vc15, cmake_params: '-G "Visual Studio 16" -T v141 -A Win32', cmake_flags: ' /wd4267 /wd4244 /wd4305 /wd4996', test_config: 'Release/', ilib: 'gaol', choco_flags: '--x86', desc: 'Windows Visual Studio 2017 x86' }
-            - { os: windows-2022, shell: cmd, arch: x64, bitness: 64, runtime: mingw13, cmake_params: '-G "MinGW Makefiles"', cmake_flags: '-fPIC', ilib: 'gaol', desc: 'Windows MinGW 13.2.0 x64' }
-            - { os: windows-2022, shell: cmd, arch: x86, bitness: 32, runtime: mingw13, cmake_params: '-G "MinGW Makefiles"', cmake_flags: '-fPIC', ilib: 'gaol', choco_flags: '--x86', desc: 'Windows MinGW 13.2.0 x86' }
-            - { os: windows-2022, shell: cmd, arch: x64, bitness: 64, runtime: mingw12, cmake_params: '-G "MinGW Makefiles"', cmake_flags: '-fPIC', ilib: 'gaol', desc: 'Windows MinGW 12.2.0 x64' }
-            - { os: windows-2022, shell: cmd, arch: x86, bitness: 32, runtime: mingw12, cmake_params: '-G "MinGW Makefiles"', cmake_flags: '-fPIC', ilib: 'gaol', choco_flags: '--x86', desc: 'Windows MinGW 12.2.0 x86' }
-            - { os: windows-2022, shell: cmd, arch: x64, bitness: 64, runtime: mingw11, cmake_params: '-G "MinGW Makefiles"', cmake_flags: '-fPIC', ilib: 'gaol', desc: 'Windows MinGW 11.2.0 x64' }
-            - { os: windows-2022, shell: cmd, arch: x86, bitness: 32, runtime: mingw11, cmake_params: '-G "MinGW Makefiles"', cmake_flags: '-fPIC', ilib: 'gaol', choco_flags: '--x86', desc: 'Windows MinGW 11.2.0 x86' }
-            - { os: windows-2019, shell: cmd, arch: x64, bitness: 64, runtime: mingw8, cmake_params: '-G "MinGW Makefiles"', cmake_flags: '-fPIC', ilib: 'gaol', desc: 'Windows MinGW 8.1.0 x64' }
-            - { os: windows-2019, shell: cmd, arch: x86, bitness: 32, runtime: mingw8, cmake_params: '-G "MinGW Makefiles"', cmake_flags: '-fPIC', ilib: 'gaol', choco_flags: '--x86', desc: 'Windows MinGW 8.1.0 x86' }
-            - { os: windows-2019, shell: cmd, arch: x64, bitness: 64, runtime: mingw7, cmake_params: '-G "MinGW Makefiles"', cmake_flags: '-fPIC', ilib: 'gaol', desc: 'Windows MinGW 7.3.0 x64' }
-            - { os: windows-2019, shell: cmd, arch: x86, bitness: 32, runtime: mingw7, cmake_params: '-G "MinGW Makefiles"', cmake_flags: '-fPIC', ilib: 'gaol', choco_flags: '--x86', desc: 'Windows MinGW 7.3.0 x86' }
+            - { os: windows-2022, shell: cmd, arch: x64, bitness: 64, runtime: vc17, cmake_params: '-G "Visual Studio 17" -T v143 -A x64', cmake_flags: ' /wd4267 /wd4244 /wd4305 /wd4996', test_config: 'Release/', ilib: 'gaol', cmake_gaol: ' -D MATHLIB_DIR=../mathlib -D GAOL_DIR=../gaol', desc: 'Windows Visual Studio 2022 x64' }
+            - { os: windows-2022, shell: cmd, arch: x86, bitness: 32, runtime: vc17, cmake_params: '-G "Visual Studio 17" -T v143 -A Win32', cmake_flags: ' /wd4267 /wd4244 /wd4305 /wd4996', test_config: 'Release/', ilib: 'gaol', cmake_gaol: ' -D MATHLIB_DIR=../mathlib -D GAOL_DIR=../gaol', choco_flags: '--x86', desc: 'Windows Visual Studio 2022 x86' }
+            - { os: windows-2022, shell: cmd, arch: x64, bitness: 64, runtime: vc16, cmake_params: '-G "Visual Studio 17" -T v142 -A x64', cmake_flags: ' /wd4267 /wd4244 /wd4305 /wd4996', test_config: 'Release/', ilib: 'gaol', cmake_gaol: ' -D MATHLIB_DIR=../mathlib -D GAOL_DIR=../gaol', desc: 'Windows Visual Studio 2019 x64' }
+            - { os: windows-2022, shell: cmd, arch: x86, bitness: 32, runtime: vc16, cmake_params: '-G "Visual Studio 17" -T v142 -A Win32', cmake_flags: ' /wd4267 /wd4244 /wd4305 /wd4996', test_config: 'Release/', ilib: 'gaol', cmake_gaol: ' -D MATHLIB_DIR=../mathlib -D GAOL_DIR=../gaol', choco_flags: '--x86', desc: 'Windows Visual Studio 2019 x86' }
+            - { os: windows-2019, shell: cmd, arch: x64, bitness: 64, runtime: vc15, cmake_params: '-G "Visual Studio 16" -T v141 -A x64', cmake_flags: ' /wd4267 /wd4244 /wd4305 /wd4996', test_config: 'Release/', ilib: 'gaol', cmake_gaol: ' -D MATHLIB_DIR=../mathlib -D GAOL_DIR=../gaol', desc: 'Windows Visual Studio 2017 x64' }
+            - { os: windows-2019, shell: cmd, arch: x86, bitness: 32, runtime: vc15, cmake_params: '-G "Visual Studio 16" -T v141 -A Win32', cmake_flags: ' /wd4267 /wd4244 /wd4305 /wd4996', test_config: 'Release/', ilib: 'gaol', cmake_gaol: ' -D MATHLIB_DIR=../mathlib -D GAOL_DIR=../gaol', choco_flags: '--x86', desc: 'Windows Visual Studio 2017 x86' }
+            - { os: windows-2022, shell: cmd, arch: x64, bitness: 64, runtime: mingw13, cmake_params: '-G "MinGW Makefiles"', cmake_flags: '-fPIC', ilib: 'gaol', cmake_gaol: ' -D MATHLIB_DIR=../mathlib -D GAOL_DIR=../gaol', desc: 'Windows MinGW 13.2.0 x64' }
+            - { os: windows-2022, shell: cmd, arch: x86, bitness: 32, runtime: mingw13, cmake_params: '-G "MinGW Makefiles"', cmake_flags: '-fPIC', ilib: 'gaol', cmake_gaol: ' -D MATHLIB_DIR=../mathlib -D GAOL_DIR=../gaol', choco_flags: '--x86', desc: 'Windows MinGW 13.2.0 x86' }
+            - { os: windows-2022, shell: cmd, arch: x64, bitness: 64, runtime: mingw12, cmake_params: '-G "MinGW Makefiles"', cmake_flags: '-fPIC', ilib: 'gaol', cmake_gaol: ' -D MATHLIB_DIR=../mathlib -D GAOL_DIR=../gaol', desc: 'Windows MinGW 12.2.0 x64' }
+            - { os: windows-2022, shell: cmd, arch: x86, bitness: 32, runtime: mingw12, cmake_params: '-G "MinGW Makefiles"', cmake_flags: '-fPIC', ilib: 'gaol', cmake_gaol: ' -D MATHLIB_DIR=../mathlib -D GAOL_DIR=../gaol', choco_flags: '--x86', desc: 'Windows MinGW 12.2.0 x86' }
+            - { os: windows-2022, shell: cmd, arch: x64, bitness: 64, runtime: mingw11, cmake_params: '-G "MinGW Makefiles"', cmake_flags: '-fPIC', ilib: 'gaol', cmake_gaol: ' -D MATHLIB_DIR=../mathlib -D GAOL_DIR=../gaol', desc: 'Windows MinGW 11.2.0 x64' }
+            - { os: windows-2022, shell: cmd, arch: x86, bitness: 32, runtime: mingw11, cmake_params: '-G "MinGW Makefiles"', cmake_flags: '-fPIC', ilib: 'gaol', cmake_gaol: ' -D MATHLIB_DIR=../mathlib -D GAOL_DIR=../gaol', choco_flags: '--x86', desc: 'Windows MinGW 11.2.0 x86' }
+            - { os: windows-2019, shell: cmd, arch: x64, bitness: 64, runtime: mingw8, cmake_params: '-G "MinGW Makefiles"', cmake_flags: '-fPIC', ilib: 'gaol', cmake_gaol: ' -D MATHLIB_DIR=../mathlib -D GAOL_DIR=../gaol', desc: 'Windows MinGW 8.1.0 x64' }
+            - { os: windows-2019, shell: cmd, arch: x86, bitness: 32, runtime: mingw8, cmake_params: '-G "MinGW Makefiles"', cmake_flags: '-fPIC', ilib: 'gaol', cmake_gaol: ' -D MATHLIB_DIR=../mathlib -D GAOL_DIR=../gaol', choco_flags: '--x86', desc: 'Windows MinGW 8.1.0 x86' }
+            - { os: windows-2019, shell: cmd, arch: x64, bitness: 64, runtime: mingw7, cmake_params: '-G "MinGW Makefiles"', cmake_flags: '-fPIC', ilib: 'gaol', cmake_gaol: ' -D MATHLIB_DIR=../mathlib -D GAOL_DIR=../gaol', desc: 'Windows MinGW 7.3.0 x64' }
+            - { os: windows-2019, shell: cmd, arch: x86, bitness: 32, runtime: mingw7, cmake_params: '-G "MinGW Makefiles"', cmake_flags: '-fPIC', ilib: 'gaol', cmake_gaol: ' -D MATHLIB_DIR=../mathlib -D GAOL_DIR=../gaol', choco_flags: '--x86', desc: 'Windows MinGW 7.3.0 x86' }
             - { os: ubuntu-24.04, shell: bash, arch: amd64, bitness: 64, runtime: noble, cmake_flags: '-fPIC', ilib: 'gaol', deb: true, desc: 'Ubuntu 24.04 amd64' }
             - { os: ubuntu-22.04, shell: bash, arch: amd64, bitness: 64, runtime: jammy, cmake_flags: '-fPIC', ilib: 'gaol', deb: true, desc: 'Ubuntu 22.04 amd64' }
             - { os: ubuntu-20.04, shell: bash, arch: amd64, bitness: 64, runtime: focal, cmake_flags: '-fPIC', ilib: 'gaol', deb: true, desc: 'Ubuntu 20.04 amd64' }
             - { os: macos-15, shell: bash, arch: arm64, bitness: 64, runtime: sequoia, cmake_params: '-D CMAKE_SYSTEM_NAME=Darwin -D CMAKE_OSX_ARCHITECTURES=arm64', cmake_flags: '-fPIC', ilib: 'gaol', desc: 'macOS Sequoia arm64' }
-#            - { os: macos-15, shell: bash, arch: x86_64, bitness: 64, runtime: sequoia, cmake_params: '-D CMAKE_SYSTEM_NAME=Darwin -D CMAKE_OSX_ARCHITECTURES=x86_64', cmake_flags: '-fPIC', ilib: 'gaol', desc: 'macOS Sequoia x86_64' }
+#            - { os: macos-15, shell: bash, arch: x86_64, bitness: 64, runtime: sequoia, cmake_params: '-D CMAKE_SYSTEM_NAME=Darwin -D CMAKE_OSX_ARCHITECTURES=x86_64', cmake_flags: '-fPIC', ilib: 'gaol', cmake_gaol: ' -D MATHLIB_DIR=../mathlib -D GAOL_DIR=../gaol', desc: 'macOS Sequoia x86_64' }
             - { os: macos-14, shell: bash, arch: arm64, bitness: 64, runtime: sonoma, cmake_params: '-D CMAKE_SYSTEM_NAME=Darwin -D CMAKE_OSX_ARCHITECTURES=arm64', cmake_flags: '-fPIC', ilib: 'gaol', desc: 'macOS Sonoma arm64' }
-#            - { os: macos-14, shell: bash, arch: x86_64, bitness: 64, runtime: sonoma, cmake_params: '-D CMAKE_SYSTEM_NAME=Darwin -D CMAKE_OSX_ARCHITECTURES=x86_64', cmake_flags: '-fPIC', ilib: 'gaol', desc: 'macOS Sonoma x86_64' }
-#            - { os: macos-13, shell: bash, arch: arm64, bitness: 64, runtime: ventura, cmake_params: '-D CMAKE_SYSTEM_NAME=Darwin -D CMAKE_OSX_ARCHITECTURES=arm64', cmake_flags: '-fPIC', ilib: 'gaol', desc: 'macOS Ventura arm64' }
+#            - { os: macos-14, shell: bash, arch: x86_64, bitness: 64, runtime: sonoma, cmake_params: '-D CMAKE_SYSTEM_NAME=Darwin -D CMAKE_OSX_ARCHITECTURES=x86_64', cmake_flags: '-fPIC', ilib: 'gaol', cmake_gaol: ' -D MATHLIB_DIR=../mathlib -D GAOL_DIR=../gaol', desc: 'macOS Sonoma x86_64' }
+#            - { os: macos-13, shell: bash, arch: arm64, bitness: 64, runtime: ventura, cmake_params: '-D CMAKE_SYSTEM_NAME=Darwin -D CMAKE_OSX_ARCHITECTURES=arm64', cmake_flags: '-fPIC', ilib: 'gaol', cmake_gaol: ' -D MATHLIB_DIR=../mathlib -D GAOL_DIR=../gaol', desc: 'macOS Ventura arm64' }
             - { os: macos-13, shell: bash, arch: x86_64, bitness: 64, runtime: ventura, cmake_params: '-D CMAKE_SYSTEM_NAME=Darwin -D CMAKE_OSX_ARCHITECTURES=x86_64', cmake_flags: '-fPIC', ilib: 'gaol', desc: 'macOS Ventura x86_64' }
     name: ${{ matrix.cfg.desc }}
     steps: 
@@ -118,16 +118,46 @@ jobs:
       if: (matrix.cfg.runtime=='mingw13')
     - run: sudo apt-get -q update ; sudo apt-get -y install flex bison dpkg-dev || true
       if: matrix.cfg.deb==true
+    - run: |  
+        # Temporary build of mathlib using cmake...
+        if [ ${{ runner.os }} = Windows ]; then source ~/refreshenv.bashrc ; refreshenv ; export PATH=$BASHMINGWPATH:$PATH ; fi
+        mkdir mathlib-tmp ; cd mathlib-tmp ; git clone --depth 1 -b master https://github.com/lebarsfa/mathlib.git ; cd mathlib
+        mkdir build ; cd build
+        cmake -E env CXXFLAGS="${{ matrix.cfg.cmake_flags }}" CFLAGS="${{ matrix.cfg.cmake_flags }}" cmake ${{ matrix.cfg.cmake_params }} -D CMAKE_INSTALL_PREFIX=../../../mathlib ..
+        cmake --build . -j 4 --config Release --target install
+        cd ../../..
+        rm -Rf mathlib-tmp
+      shell: bash
+      if: matrix.cfg.cmake_gaol!=''
+    - run: |    
+        # Temporary build of gaol using cmake...
+        if [ ${{ runner.os }} = Windows ]; then source ~/refreshenv.bashrc ; refreshenv ; export PATH=$BASHMINGWPATH:$PATH ; fi
+        mkdir gaol-tmp ; cd gaol-tmp ; git clone --depth 1 -b master https://github.com/lebarsfa/gaol.git ; cd gaol
+        mkdir build ; cd build
+        cmake -E env CXXFLAGS="${{ matrix.cfg.cmake_flags }}" CFLAGS="${{ matrix.cfg.cmake_flags }}" cmake ${{ matrix.cfg.cmake_params }} -D GAOL_ENABLE_PRESERVE_ROUNDING=OFF -D GAOL_ENABLE_OPTIMIZE=ON -D GAOL_ENABLE_VERBOSE_MODE=OFF -D CMAKE_PREFIX_PATH=../../mathlib -D CMAKE_INSTALL_PREFIX=../../../gaol ..
+        cmake --build . -j 4 --config Release --target install
+        cd ../../..
+        rm -Rf gaol-tmp
+      shell: bash
+      if: matrix.cfg.cmake_gaol!=''
     - run: |    
         if [ ${{ runner.os }} = Windows ]; then source ~/refreshenv.bashrc ; refreshenv ; export PATH=$BASHMINGWPATH:$PATH ; fi
         mkdir build ; cd build
-        cmake -E env CXXFLAGS="${{ matrix.cfg.cmake_flags }}" CFLAGS="${{ matrix.cfg.cmake_flags }}" cmake ${{ matrix.cfg.cmake_params }} -D INTERVAL_LIB=${{ matrix.cfg.ilib }} -D CMAKE_INSTALL_PREFIX=../ibex ..
+        cmake -E env CXXFLAGS="${{ matrix.cfg.cmake_flags }}" CFLAGS="${{ matrix.cfg.cmake_flags }}" cmake ${{ matrix.cfg.cmake_params }} -D INTERVAL_LIB=${{ matrix.cfg.ilib }} ${{ matrix.cfg.cmake_gaol }} -D CMAKE_INSTALL_PREFIX=../ibex ..
         cmake --build . -j 4 --config Release --target install
         cd ..
+        # Temporary...
+        if [ -n "${{ matrix.cfg.cmake_gaol }}" ]; then 
+         mkdir -p ibex/include/ibex/3rd/gaol ibex/lib/ibex/3rd
+         cp -r mathlib/include/* ibex/include/ibex/3rd
+         cp -r gaol/include/* ibex/include/ibex/3rd
+         cp -r mathlib/lib/* ibex/lib/ibex/3rd
+         cp -r gaol/lib/* ibex/lib/ibex/3rd
+        fi
         # Probably to remove if GAOL is installed using CMake...
-        if [ ${{ runner.os }} = Windows ]; then sed -i "s/D:\\/a\\/ibex-lib\\/ibex-lib\\/ibex/\${_IMPORT_PREFIX}/" ibex/share/ibex/cmake/*.cmake ; fi
-        if [ ${{ runner.os }} = Linux ]; then sed -i "s/\\/home\\/runner\\/work\\/ibex-lib\\/ibex-lib\\/ibex/\${_IMPORT_PREFIX}/" ibex/share/ibex/cmake/*.cmake ; fi
-        if [ ${{ runner.os }} = macOS ]; then sed -i "" "s/\\/Users\\/runner\\/work\\/ibex-lib\\/ibex-lib\\/ibex/\${_IMPORT_PREFIX}/" ibex/share/ibex/cmake/*.cmake ; fi # See https://stackoverflow.com/questions/12272065/sed-undefined-label-on-macos
+        if [ ${{ runner.os }} = Windows ]; then sed -i "s/D:\\/a\\/ibex-lib\\/ibex-lib\\/ibex/\${_IMPORT_PREFIX}/" ibex/share/ibex/cmake/*.cmake ; sed -i "s/D:\\/a\\/ibex-lib\\/ibex-lib\\/gaol\\/lib/\${_IMPORT_PREFIX}\\/lib\\/ibex\\/3rd/" ibex/share/ibex/cmake/*.cmake ; sed -i "s/D:\\/a\\/ibex-lib\\/ibex-lib\\/gaol\\/include/\${_IMPORT_PREFIX}\\/include\\/ibex\\/3rd/" ibex/share/ibex/cmake/*.cmake ; sed -i "s/D:\\/a\\/ibex-lib\\/ibex-lib\\/mathlib\\/lib/\${_IMPORT_PREFIX}\\/lib\\/ibex\\/3rd/" ibex/share/ibex/cmake/*.cmake ; sed -i "s/D:\\/a\\/ibex-lib\\/ibex-lib\\/mathlib\\/include/\${_IMPORT_PREFIX}\\/include\\/ibex\\/3rd/" ibex/share/ibex/cmake/*.cmake ; fi
+        if [ ${{ runner.os }} = Linux ]; then sed -i "s/\\/home\\/runner\\/work\\/ibex-lib\\/ibex-lib\\/ibex/\${_IMPORT_PREFIX}/" ibex/share/ibex/cmake/*.cmake ; sed -i "s/\\/home\\/runner\\/work\\/ibex-lib\\/ibex-lib\\/gaol\\/lib/\${_IMPORT_PREFIX}\\/lib\\/ibex\\/3rd/" ibex/share/ibex/cmake/*.cmake ; sed -i "s/\\/home\\/runner\\/work\\/ibex-lib\\/ibex-lib\\/gaol\\/include/\${_IMPORT_PREFIX}\\/include\\/ibex\\/3rd/" ibex/share/ibex/cmake/*.cmake ; sed -i "s/\\/home\\/runner\\/work\\/ibex-lib\\/ibex-lib\\/mathlib\\/lib/\${_IMPORT_PREFIX}\\/lib\\/ibex\\/3rd/" ibex/share/ibex/cmake/*.cmake ; sed -i "s/\\/home\\/runner\\/work\\/ibex-lib\\/ibex-lib\\/mathlib\\/include/\${_IMPORT_PREFIX}\\/include\\/ibex\\/3rd/" ibex/share/ibex/cmake/*.cmake ; fi
+        if [ ${{ runner.os }} = macOS ]; then sed -i "" "s/\\/Users\\/runner\\/work\\/ibex-lib\\/ibex-lib\\/ibex/\${_IMPORT_PREFIX}/" ibex/share/ibex/cmake/*.cmake ; sed -i "" "s/\\/Users\\/runner\\/work\\/ibex-lib\\/ibex-lib\\/gaol\\/lib/\${_IMPORT_PREFIX}\\/lib\\/ibex\\/3rd/" ibex/share/ibex/cmake/*.cmake ; sed -i "" "s/\\/Users\\/runner\\/work\\/ibex-lib\\/ibex-lib\\/gaol\\/include/\${_IMPORT_PREFIX}\\/include\\/ibex\\/3rd/" ibex/share/ibex/cmake/*.cmake ; sed -i "" "s/\\/Users\\/runner\\/work\\/ibex-lib\\/ibex-lib\\/mathlib\\/lib/\${_IMPORT_PREFIX}\\/lib\\/ibex\\/3rd/" ibex/share/ibex/cmake/*.cmake ; sed -i "" "s/\\/Users\\/runner\\/work\\/ibex-lib\\/ibex-lib\\/mathlib\\/include/\${_IMPORT_PREFIX}\\/include\\/ibex\\/3rd/" ibex/share/ibex/cmake/*.cmake ; fi # See https://stackoverflow.com/questions/12272065/sed-undefined-label-on-macos
         zip -q -r ibex_${{ matrix.cfg.arch }}_${{ matrix.cfg.runtime }}.zip ibex
       shell: bash
     - run: |
@@ -173,7 +203,7 @@ jobs:
       if: (github.event_name != 'pull_request')
     - run: |
         if [ ${{ runner.os }} = Windows ]; then source ~/refreshenv.bashrc ; refreshenv ; export PATH=$BASHMINGWPATH:$PATH ; fi
-        rm -Rf ibex
+        rm -Rf ibex gaol mathlib
         cd tests/test_ibex
         cmake ${{ matrix.cfg.cmake_params }} .
         cmake --build . --config Release
