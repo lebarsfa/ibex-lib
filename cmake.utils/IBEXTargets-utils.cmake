@@ -556,7 +556,7 @@ function (IBEX_INIT_COMMON)
   ##############################################################################
   # add uninstall command
   ##############################################################################
-  add_uninstall_command ("${CMAKE_CURRENT_BINARY_DIR}/cmake_uninstall.cmake")
+  #add_uninstall_command ("${CMAKE_CURRENT_BINARY_DIR}/cmake_uninstall.cmake")
 endfunction ()
 
 ################################################################################
