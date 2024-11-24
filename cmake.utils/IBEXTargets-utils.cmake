@@ -457,7 +457,11 @@ function (IBEX_INIT_COMMON)
   if (NOT CMAKE_CXX_STANDARD)
     set (CMAKE_CXX_STANDARD 11 PARENT_SCOPE)
     set (CMAKE_CXX_STANDARD_REQUIRED ON PARENT_SCOPE)
+    set (CMAKE_CXX_EXTENSIONS OFF PARENT_SCOPE)
   endif ()
+  #set(CMAKE_CXX_STANDARD 11 CACHE STRING "The C++ standard to use")
+  #set(CMAKE_CXX_STANDARD_REQUIRED ON PARENT_SCOPE)
+  #set(CMAKE_CXX_EXTENSIONS OFF PARENT_SCOPE)
 
   ##############################################################################
   # Set flags and build type (release or debug)
