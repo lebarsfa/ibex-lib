@@ -7,8 +7,14 @@ target_include_directories (ibex PUBLIC "$<BUILD_INTERFACE:${IBEX_INCDIRS}>")
 
 target_link_libraries (ibex PUBLIC ${INTERVAL_LIB_TARGET} ${LP_LIB_TARGET})
 if (WIN32)
-  # We (may) need this for strdup under Windows (see issue #287)
-  target_compile_options (ibex PUBLIC "-U__STRICT_ANSI__")
+# This may cause issues on recent versions of MinGW...
+#  # We (may) need this for strdup under Windows (see issue #287)
+#  target_compile_options (ibex PUBLIC "-U__STRICT_ANSI__")
+  include (CheckFunctionExists)
+  check_function_exists (strdup HAVE_STRDUP)
+  if (NOT HAVE_STRDUP)
+    target_compile_options (ibex PUBLIC -Dstrdup=_strdup)
+  endif ()
 endif ()
 
 ################################################################################
