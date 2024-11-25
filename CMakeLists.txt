@@ -2,7 +2,7 @@ cmake_minimum_required (VERSION 3.14...3.25)
 #cmake_minimum_required (VERSION 3.5.1)
 # CMake doc can be found at https://cmake.org/cmake/help/v3.5/
 
-message (WARNING "CMake support is in beta, please report all bugs to https://github.com/ibex-team/ibex-lib/issues/")
+#message (WARNING "CMake support is in beta, please report all bugs to https://github.com/ibex-team/ibex-lib/issues/")
 
 project (IBEX VERSION 2.8.9.20241103)
 set (IBEX_DESCRIPTION "A C++ library for interval-based algorithm design")
