@@ -64,7 +64,10 @@ ibex_generate_pkgconfig_file (ibex)
 ################################################################################
 # Tests
 ################################################################################
-add_make_target_for_ctest (check)
+# Only do these if this is the main project, and not if it is included through add_subdirectory
+if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
+	add_make_target_for_ctest (check)
+endif()
 
 ################################################################################
 # TODO benchs

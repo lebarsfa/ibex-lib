@@ -408,7 +408,7 @@ foreach(file \${files})\n\
   endif()\n\
 endforeach()\n\
 ")
-  add_custom_target(uninstall "${CMAKE_COMMAND}" -P "${UNINSTALL_SCRIPT}")
+  add_custom_target(uninstall_${PROJECT_NAME} "${CMAKE_COMMAND}" -P "${UNINSTALL_SCRIPT}")
 endfunction ()
 
 ################################################################################
