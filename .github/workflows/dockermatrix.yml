@@ -64,7 +64,7 @@ jobs:
         cd .. && \
         sed -i "s/\\\\/home\\\\/runner\\\\/work\\\\/ibex-lib\\\\/ibex-lib\\\\/ibex/\\\${_IMPORT_PREFIX}/" ibex/share/ibex/cmake/*.cmake && \
         zip -q -r ibex_${{ matrix.cfg.arch }}_${{ matrix.cfg.runtime }}.zip ibex && \
-        if [ ${{ matrix.cfg.deb }} = true ]; then \
+        if [ \"${{ matrix.cfg.deb }}\" = \"true\" ]; then \
         cd packages && \
         chmod +x ./genlibibex-dev.sh && \
         ./genlibibex-dev.sh \$(if [ -z \"\$(. /etc/os-release && echo \$UBUNTU_CODENAME)\" ]; then echo debian; else echo ubuntu; fi) ${{ matrix.cfg.runtime }} \$(dpkg --print-architecture) $SOFTWARE_VERSION $DEBIAN_PACKAGE_REV $PACKAGE_REV && \
