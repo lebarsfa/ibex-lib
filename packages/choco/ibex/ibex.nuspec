@@ -3,7 +3,7 @@
   <metadata>
     <id>ibex</id>
     <version>2</version>
-    <packageSourceUrl>https://github.com/lebarsfa/ibex-lib/tree/actions/packages/choco/ibex/</packageSourceUrl>
+    <packageSourceUrl>https://github.com/lebarsfa/ibex-lib/tree/master/packages/choco/ibex/</packageSourceUrl>
     <owners>lebarsfa</owners>
     <title>IBEX</title>
     <authors>IBEX Team</authors>
@@ -27,7 +27,7 @@ IBEX is a C++ library for constraint processing over real numbers.
 
 ## Package parameters
 The following package parameters can be set:
-- `/url:URL` - Will install the specified binary package (e.g. built for Visual Studio), see versions from https://github.com/lebarsfa/ibex-lib/releases (the Windows `PATH` might need to be updated manually with e.g. `C:\ProgramData\chocolatey\lib\ibex\bin`, etc.). By default, only the MinGW libraries compatible with the corresponding MinGW Chocolatey package dependency are installed. Use the standard parameter `choco install --ignore-dependencies ...` to avoid installing MinGW Chocolatey package dependency if needed.
+- `/url:URL` - Will install the specified binary package (e.g. built for Visual Studio), e.g. see versions from https://github.com/lebarsfa/ibex-lib/releases (the Windows `PATH` might need to be updated manually with e.g. `C:\ProgramData\chocolatey\lib\ibex\bin`, etc.). By default, only the MinGW libraries compatible with the corresponding MinGW Chocolatey package dependency are installed. Use the standard parameter `choco install --ignore-dependencies ...` to avoid installing MinGW Chocolatey package dependency if needed.
 - `/checksum:SHA256` - SHA256 checksum of the binary package specified by the `/url` parameter. If needed, use the standard parameter `choco install --ignore-checksums ...` for trusted sources.
 - `/urlX:URL` - Same as above, with X in [1,99], except this will not disable the installation of the MinGW libraries compatible with the corresponding MinGW Chocolatey package dependency.
 - `/checksumX:SHA256` - SHA256 checksum of the binary package specified by the `/urlX` parameter. If needed, use the standard parameter `choco install --ignore-checksums ...` for trusted sources.
