@@ -15,9 +15,15 @@ Write-Host "IBEX is going to be uninstalled from '$installDir'"
 
 $root = Join-Path $installDir "ibex"
 
-$newpath = [environment]::GetEnvironmentVariable("Path","Machine")
-$newpath = ($newpath.Split(';') | Where-Object { $_ -ne "$root\bin" }) -join ';'
-[environment]::SetEnvironmentVariable("Path",$newpath,"Machine")
+try {
+    # Uninstall-ChocolateyPath does not seem always available...
+    Uninstall-ChocolateyPath "$root\bin" -PathType 'Machine'
+}
+catch {
+    $newpath = [environment]::GetEnvironmentVariable("Path","Machine")
+    $newpath = ($newpath.Split(';') | Where-Object { $_ -ne "$root\bin" }) -join ';'
+    [environment]::SetEnvironmentVariable("Path",$newpath,"Machine")
+}
 
 Remove-ItemProperty -Path $CMakeSystemRepositoryPath\$CMakePackageName -Name "$CMakePackageName$CMakePackageVer`_$arch" -ErrorAction SilentlyContinue
 
