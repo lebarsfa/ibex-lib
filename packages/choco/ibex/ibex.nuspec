@@ -43,7 +43,7 @@ choco install -y --ignore-dependencies ibex --params "'/url:https://github.com/l
     <releaseNotes>https://github.com/lebarsfa/ibex-lib/releases</releaseNotes>
     <dependencies>
       <dependency id="chocolatey-core.extension" version="1.1.0" />
-      <dependency id="mingw" version="[11.2.0.07112021]" />
+      <dependency id="mingw" version="[13.2.0]" />
     </dependencies>
   </metadata>
 </package>

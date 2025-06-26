@@ -32,9 +32,9 @@ New-Item -ItemType Directory -Force -Path $root | Out-Null
 $AllowedUrlPrefix = 'https://github.com/lebarsfa/ibex-lib'
 
 if (!$pp['url']) { 
-	$url = 'https://github.com/lebarsfa/ibex-lib/releases/download/ibex-2/ibex_x86_mingw11.zip'
+	$url = 'https://github.com/lebarsfa/ibex-lib/releases/download/ibex-2/ibex_x86_mingw13.zip'
 	$checksum = 'EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE'
-	$url64 = 'https://github.com/lebarsfa/ibex-lib/releases/download/ibex-2/ibex_x64_mingw11.zip'
+	$url64 = 'https://github.com/lebarsfa/ibex-lib/releases/download/ibex-2/ibex_x64_mingw13.zip'
 	$checksum64 = 'FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF'
 	$packageArgs = @{
 		packageName   = $env:ChocolateyPackageName

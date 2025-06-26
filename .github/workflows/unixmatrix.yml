@@ -176,7 +176,7 @@ jobs:
         cd ../../..
         checksum -f=ibex.$PACKAGE_VERSION.nupkg -t=sha256
         choco install -y -r --no-progress --ignore-dependencies -s . ibex --params "'/url:./ibex_${{ matrix.cfg.arch }}_${{ matrix.cfg.runtime }}.zip'"
-        if [ ${{ matrix.cfg.runtime }} != mingw11 ] || [ ${{ matrix.cfg.arch }} != x64 ]; then rm -Rf ibex.$PACKAGE_VERSION.nupkg ; fi # To avoid upload conflicts of the same file...
+        if [ ${{ matrix.cfg.runtime }} != mingw13 ] || [ ${{ matrix.cfg.arch }} != x64 ]; then rm -Rf ibex.$PACKAGE_VERSION.nupkg ; fi # To avoid upload conflicts of the same file...
         checksum -f=ibex_${{ matrix.cfg.arch }}_${{ matrix.cfg.runtime }}.zip -t=sha256
       shell: bash
       if: runner.os=='Windows'
