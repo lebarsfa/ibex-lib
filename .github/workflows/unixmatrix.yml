@@ -1,8 +1,8 @@
 on:
     push:
-        branches: '**'
-#        branches: 'master'
-        tags: '' # Restrict to blank tags
+        branches: ['**']
+#        branches: ['master']
+        tags-ignore: ['**']  # Ignore all tag pushes
     pull_request:
 
 jobs:
@@ -52,7 +52,7 @@ jobs:
             - { os: macos-13, shell: bash, arch: x86_64, bitness: 64, runtime: ventura, cmake_params: '-D CMAKE_SYSTEM_NAME=Darwin -D CMAKE_OSX_ARCHITECTURES=x86_64', cmake_flags: '-fPIC', ilib: 'gaol', desc: 'macOS Ventura x86_64' }
     name: ${{ matrix.cfg.desc }}
     steps: 
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v5
       with:
         submodules: true
         fetch-depth: 0
