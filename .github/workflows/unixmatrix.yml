@@ -168,7 +168,7 @@ jobs:
     - run: |  
         # Temporary build of mathlib using cmake...
         if [ ${{ runner.os }} = Windows ]; then source ~/refreshenv.bashrc ; refreshenv ; export PATH=$BASHMINGWPATH:$BASHCMAKEPATH:$PATH ; fi
-        mkdir mathlib-tmp ; cd mathlib-tmp ; git clone --depth 1 -b master https://github.com/lebarsfa/mathlib.git ; cd mathlib
+        mkdir mathlib-tmp ; cd mathlib-tmp ; git clone --depth 1 -b prerelease https://github.com/lebarsfa/mathlib.git ; cd mathlib
         mkdir build ; cd build
         cmake -E env CXXFLAGS="${{ matrix.cfg.cmake_flags }}" CFLAGS="${{ matrix.cfg.cmake_flags }}" cmake ${{ matrix.cfg.cmake_params }} -D CMAKE_INSTALL_PREFIX=../../../mathlib ..
         cmake --build . -j 4 --config Release --target install
@@ -179,7 +179,7 @@ jobs:
     - run: |    
         # Temporary build of gaol using cmake...
         if [ ${{ runner.os }} = Windows ]; then source ~/refreshenv.bashrc ; refreshenv ; export PATH=$BASHMINGWPATH:$BASHCMAKEPATH:$PATH ; fi
-        mkdir gaol-tmp ; cd gaol-tmp ; git clone --depth 1 -b master https://github.com/lebarsfa/gaol.git ; cd gaol
+        mkdir gaol-tmp ; cd gaol-tmp ; git clone --depth 1 -b prerelease https://github.com/lebarsfa/gaol.git ; cd gaol
         mkdir build ; cd build
         cmake -E env CXXFLAGS="${{ matrix.cfg.cmake_flags }}" CFLAGS="${{ matrix.cfg.cmake_flags }}" cmake ${{ matrix.cfg.cmake_params }} -D GAOL_ENABLE_PRESERVE_ROUNDING=OFF -D GAOL_ENABLE_OPTIMIZE=ON -D GAOL_ENABLE_VERBOSE_MODE=OFF -D CMAKE_PREFIX_PATH=../../mathlib -D CMAKE_INSTALL_PREFIX=../../../gaol ..
         cmake --build . -j 4 --config Release --target install
