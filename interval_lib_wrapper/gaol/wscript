@@ -95,7 +95,7 @@ def configure (conf):
 	else:
 		conf.msg("Using library mathlib/ultim from", "3rd/ subdirectory")
 		# From https://github.com/lebarsfa/GAOL
-		mathlib_archive = "mathlib-master.zip"
+		mathlib_archive = "mathlib-prerelease.zip"
 		if Utils.is_win32:
 			mathlib_ret = conf.install_mathlib_win32 (mathlib_archive)
 		else:
@@ -119,7 +119,7 @@ def configure (conf):
 	else:
 		conf.msg ("Using library gaol from", "3rd/ subdirectory")
 		# From https://github.com/lebarsfa/GAOL
-		gaol_archive = "GAOL-master.zip"
+		gaol_archive = "GAOL-prerelease.zip"
 		if Utils.is_win32:
 			args = "--with-mathlib-include=%s" % ibexutils.convert_path_win2msys (mathlib_include)
 			args += " --with-mathlib-lib=%s" % ibexutils.convert_path_win2msys (mathlib_lib)

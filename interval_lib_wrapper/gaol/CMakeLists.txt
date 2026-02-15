@@ -28,8 +28,8 @@ else()
   # From https://github.com/lebarsfa/mathlib
   if(MINGW)
   ExternalProject_Add (libultim_3rd
-                        PREFIX mathlib-master
-                        URL ${CMAKE_CURRENT_SOURCE_DIR}/3rd/mathlib-master.zip
+                        PREFIX mathlib-prerelease
+                        URL ${CMAKE_CURRENT_SOURCE_DIR}/3rd/mathlib-prerelease.zip
                         BUILD_IN_SOURCE 1
                         CONFIGURE_COMMAND sh -c "./configure --prefix=<INSTALL_DIR>
                                                       CFLAGS=${CMAKE_C_FLAGS}"
@@ -40,8 +40,8 @@ else()
                       )
   else()
   ExternalProject_Add (libultim_3rd
-                        PREFIX mathlib-master
-                        URL ${CMAKE_CURRENT_SOURCE_DIR}/3rd/mathlib-master.zip
+                        PREFIX mathlib-prerelease
+                        URL ${CMAKE_CURRENT_SOURCE_DIR}/3rd/mathlib-prerelease.zip
                         BUILD_IN_SOURCE 1
                         CONFIGURE_COMMAND ./configure --prefix=<INSTALL_DIR>
                                                       CFLAGS=${CMAKE_C_FLAGS}
@@ -116,13 +116,13 @@ else ()
     # do it at your own risk.
     set (GAOL_CONFIG_ARGS "${GAOL_CONFIG_ARGS}" "--disable-simd")
   endif ()
-#  set (GAOL_PATCH "${CMAKE_CURRENT_SOURCE_DIR}/3rd/GAOL-master.all.all.patch")
+#  set (GAOL_PATCH "${CMAKE_CURRENT_SOURCE_DIR}/3rd/GAOL-prerelease.all.all.patch")
   # From https://github.com/lebarsfa/GAOL
   if(MINGW)
   ExternalProject_Add (libgaol_3rd
-                        PREFIX GAOL-master
+                        PREFIX GAOL-prerelease
                         ${_gaol_depends}
-                        URL ${CMAKE_CURRENT_SOURCE_DIR}/3rd/GAOL-master.zip
+                        URL ${CMAKE_CURRENT_SOURCE_DIR}/3rd/GAOL-prerelease.zip
 #                        PATCH_COMMAND patch -p1 -i ${GAOL_PATCH}
                         BUILD_IN_SOURCE 1
                         CONFIGURE_COMMAND sh -c "./configure --prefix=<INSTALL_DIR>
@@ -138,9 +138,9 @@ else ()
                       )
   else()
   ExternalProject_Add (libgaol_3rd
-                        PREFIX GAOL-master
+                        PREFIX GAOL-prerelease
                         ${_gaol_depends}
-                        URL ${CMAKE_CURRENT_SOURCE_DIR}/3rd/GAOL-master.zip
+                        URL ${CMAKE_CURRENT_SOURCE_DIR}/3rd/GAOL-prerelease.zip
 #                        PATCH_COMMAND patch -p1 -i ${GAOL_PATCH}
                         BUILD_IN_SOURCE 1
                         CONFIGURE_COMMAND ./configure --prefix=<INSTALL_DIR>
