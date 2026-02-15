@@ -10,6 +10,11 @@
 
 #include "ibex_Timer.h"
 
+#ifdef _WIN32  //_MSC_VER
+// To get struct timeval.
+#include <windows.h>
+#endif // _WIN32  //_MSC_VER
+
 namespace ibex {
 
 
@@ -55,7 +60,7 @@ void Timer::check(double timeout) {
 
 #ifdef _WIN32  //_MSC_VER
 // To get struct timeval.
-#include <windows.h>
+//#include <windows.h> // Including windows.h inside a namespace causes issues, so it has been moved at the beginning of the file...
 
 //#define DELTA_EPOCH_IN_MICROSECS 11644473600000000ui64
 //#define DELTA_EPOCH_IN_MICROSECS 11644473600000000ULL
